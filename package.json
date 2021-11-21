@@ -1,0 +1,37 @@
+{
+    "name": "inline-sql-syntax",
+    "displayName": "Inline SQL Syntax",
+    "description": "highlight strings as sql",
+    "version": "2.4.0",
+    "publisher": "qufiwefefwoyn",
+    "icon": "docs/logo.png",
+    "repository": {
+        "url": "https://github.com/barklan/inline_sql_syntax"
+    },
+    "engines": {
+        "vscode": "^1.32.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "grammars": [
+            {
+                "path": "./syntaxes/highlight-sql-string.json",
+                "scopeName": "inline-sql.injection",
+                "injectTo": [
+                    "source.python",
+                    "source.go",
+                    "source.js",
+                    "source.ts",
+                    "source.java",
+                    "source.ruby",
+                    "source.cs"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            }
+        ]
+    }
+}
