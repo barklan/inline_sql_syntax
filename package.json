@@ -1,7 +1,7 @@
 {
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL Syntax",
-    "description": "highlight strings as sql",
+    "description": "Highlight strings as SQL",
     "version": "2.4.0",
     "publisher": "qufiwefefwoyn",
     "icon": "docs/logo.png",
