@@ -1,7 +1,7 @@
 {
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL Syntax",
-    "description": "Highlight strings as SQL",
+    "description": "Highlight strings as SQL. Python, Go, JS, TS, Ruby, Java, C#.",
     "version": "2.4.0",
     "publisher": "qufiwefefwoyn",
     "icon": "docs/logo.png",

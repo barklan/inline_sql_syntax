@@ -7,4 +7,7 @@ func main() {
 select * from book;
 `
 	fmt.Println(query)
+
+	another := `SELECT * from book`
+	fmt.Println(another)
 }
