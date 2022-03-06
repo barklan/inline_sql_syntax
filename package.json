@@ -35,6 +35,7 @@
         "onLanguage:csharp"
     ],
     "main": "./out/extension.js",
+    "browser": "./out/extension.js",
     "scripts": {
         "vscode:prepublish": "npm run esbuild-base -- --minify",
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --external:pg-native --format=cjs --platform=node",
