@@ -30,9 +30,11 @@ up:db() (
     docker-compose up
 )
 
-publish() (
-    npm run vscode:prepublish
+package() (
     vsce package
+)
+
+publish() (
     vsce publish
 )
 
