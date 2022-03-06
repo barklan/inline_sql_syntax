@@ -3,17 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.subscribeToDocumentChanges = exports.refreshDiagnostics = exports.activate = exports.PY_SQL = exports.QUOTE_SQL = exports.BACKTICK_SQL = exports.SQL_FLAG = void 0;
 const vscode = require("vscode");
 const sql_lint_1 = require("sql-lint");
+const configuration = require("./configuration");
 exports.SQL_FLAG = '--sql';
 exports.BACKTICK_SQL = '`' + exports.SQL_FLAG;
 exports.QUOTE_SQL = '"' + exports.SQL_FLAG;
 exports.PY_SQL = '"""' + exports.SQL_FLAG;
 async function activate(context) {
-    const emojiDiagnostics = vscode.languages.createDiagnosticCollection("emoji");
-    context.subscriptions.push(emojiDiagnostics);
-    await subscribeToDocumentChanges(context, emojiDiagnostics);
+    const inlinesqlDiagnostics = vscode.languages.createDiagnosticCollection("inlinesql");
+    context.subscriptions.push(inlinesqlDiagnostics);
+    await subscribeToDocumentChanges(context, inlinesqlDiagnostics);
 }
 exports.activate = activate;
-async function refreshDiagnostics(doc, emojiDiagnostics) {
+async function refreshDiagnostics(doc, inlinesqlDiagnostics) {
     let diagnostics = [];
     let sqlStartLine = doc.lineAt(0);
     let sqlStringBound = "";
@@ -47,7 +48,7 @@ async function refreshDiagnostics(doc, emojiDiagnostics) {
             }
         }
     }
-    emojiDiagnostics.set(doc.uri, diagnostics);
+    inlinesqlDiagnostics.set(doc.uri, diagnostics);
 }
 exports.refreshDiagnostics = refreshDiagnostics;
 async function checkRange(doc, lineOfTextStart, lineIndexStart, lineOfTextEnd, lineIndexEnd, endStr) {
@@ -56,29 +57,37 @@ async function checkRange(doc, lineOfTextStart, lineIndexStart, lineOfTextEnd, l
     const indexEnd = lineOfTextEnd.text.indexOf(endStr);
     const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
     const sqlStr = doc.getText(range);
-    // const diagnostic = new vscode.Diagnostic(range, sqlStr, vscode.DiagnosticSeverity.Error);
-    // diagnostics.push(diagnostic)
-    const errors = await (0, sql_lint_1.default)({
-        sql: sqlStr,
-        // driver: 'postgres',
-    });
+    let errors = null;
+    if (configuration.get('enableDBIntegration')) {
+        errors = await (0, sql_lint_1.default)({
+            sql: sqlStr,
+            driver: configuration.get('dbDriver'),
+            host: configuration.get('dbHost'),
+            port: configuration.get('dbPort'),
+            user: configuration.get('dbUser'),
+            password: configuration.get('dbPassword'),
+        });
+    }
+    else {
+        errors = await (0, sql_lint_1.default)({ sql: sqlStr });
+    }
     for (const error of errors) {
         const diagnostic = new vscode.Diagnostic(range, error.error, vscode.DiagnosticSeverity.Error);
         diagnostics.push(diagnostic);
     }
     return diagnostics;
 }
-async function subscribeToDocumentChanges(context, emojiDiagnostics) {
+async function subscribeToDocumentChanges(context, inlinesqlDiagnostics) {
     if (vscode.window.activeTextEditor) {
-        await refreshDiagnostics(vscode.window.activeTextEditor.document, emojiDiagnostics);
+        await refreshDiagnostics(vscode.window.activeTextEditor.document, inlinesqlDiagnostics);
     }
     context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(editor => {
         if (editor) {
-            refreshDiagnostics(editor.document, emojiDiagnostics);
+            refreshDiagnostics(editor.document, inlinesqlDiagnostics);
         }
     }));
-    context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(e => refreshDiagnostics(e.document, emojiDiagnostics)));
-    context.subscriptions.push(vscode.workspace.onDidCloseTextDocument(doc => emojiDiagnostics.delete(doc.uri)));
+    context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(e => refreshDiagnostics(e.document, inlinesqlDiagnostics)));
+    context.subscriptions.push(vscode.workspace.onDidCloseTextDocument(doc => inlinesqlDiagnostics.delete(doc.uri)));
 }
 exports.subscribeToDocumentChanges = subscribeToDocumentChanges;
 //# sourceMappingURL=extension.js.map

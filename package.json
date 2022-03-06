@@ -3,16 +3,27 @@
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings. Python, Go, JS, TS, Ruby, Java, C#.",
     "version": "2.6.0",
+    "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
+    "license": "MIT",
     "icon": "docs/logo.png",
     "repository": {
         "url": "https://github.com/barklan/inline_sql_syntax"
     },
+    "homepage": "https://github.com/barklan/inline_sql_syntax",
     "engines": {
         "vscode": "^1.52.0"
     },
     "categories": [
-        "Programming Languages"
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "sql",
+        "postgres",
+        "mysql",
+        "lint",
+        "inline"
     ],
     "activationEvents": [
         "onLanguage:python",
@@ -51,7 +62,46 @@
                     "meta.embedded.sql": "sql"
                 }
             }
-        ]
+        ],
+        "configuration": {
+            "title": "inline-sql-syntax",
+            "properties": {
+                "inlineSQL.enableDBIntegration": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable linting using real database."
+                },
+                "inlineSQL.dbDriver": {
+                    "type": "string",
+                    "default": "postgres",
+                    "description": "Driver to use for verifying queries. It currently supports MySQL and Postgres.",
+                    "enum": [
+                        "mysql",
+                        "postgres"
+                    ]
+                },
+                "inlineSQL.dbHost": {
+                    "type": "string",
+                    "default": "localhost",
+                    "markdownDescription": "Database host address."
+                },
+                "inlineSQL.dbPort": {
+                    "type": "number",
+                    "default": 5432,
+                    "markdownDescription": "Database port."
+                },
+                "inlineSQL.dbUser": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database user."
+                },
+                "inlineSQL.dbPassword": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database password."
+                }
+            }
+        }
     },
     "devDependencies": {
         "@types/node": "^17.0.21",

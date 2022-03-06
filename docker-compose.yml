@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+
+  db:
+    image: 'postgres:14'
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+      - ./data:/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      # THIS IS UNSAFE!
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    ports:
+      - 5432:5432
+
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    links:
+      - db:db
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/app?sslmode=disable
+    depends_on:
+      - db
+
+volumes:
+  app-db-data:

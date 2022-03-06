@@ -21,22 +21,20 @@ function _dc {
 }
 
 function _use_env {
-    sort -u environment/.env | grep -v '^$\|^\s*\#' > './environment/.env.tempfile'
-    export $(cat environment/.env.tempfile | xargs)
+    set -o allexport; . .env; set +o allexport
 }
 
 # ----------------------------------------------------------------------------
-# * General purpose local functions.
 
-function publish {
+up:db() (
+    docker-compose up
+)
+
+publish() (
+    npm run vscode:prepublish
     vsce package
     vsce publish patch
-}
-
-# ----------------------------------
-# * Non-local functions
-
-
+)
 
 # -----------------------------------------------------------------------------
 

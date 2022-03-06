@@ -1,6 +1,7 @@
 'use strict';
 import * as vscode from 'vscode';
 import sqlLint from 'sql-lint';
+import * as configuration from './configuration';
 
 export const SQL_FLAG = '--sql';
 export const BACKTICK_SQL = '`' + SQL_FLAG
@@ -8,16 +9,15 @@ export const QUOTE_SQL = '"' + SQL_FLAG
 export const PY_SQL = '"""' + SQL_FLAG
 
 export async function activate(context: vscode.ExtensionContext) {
-    const emojiDiagnostics = vscode.languages.createDiagnosticCollection("emoji");
-    context.subscriptions.push(emojiDiagnostics);
+    const inlinesqlDiagnostics = vscode.languages.createDiagnosticCollection("inlinesql");
+    context.subscriptions.push(inlinesqlDiagnostics);
 
-    await subscribeToDocumentChanges(context, emojiDiagnostics);
-
+    await subscribeToDocumentChanges(context, inlinesqlDiagnostics);
 }
 
 export async function refreshDiagnostics(
     doc: vscode.TextDocument,
-    emojiDiagnostics: vscode.DiagnosticCollection
+    inlinesqlDiagnostics: vscode.DiagnosticCollection
 ): Promise<void> {
     let diagnostics: vscode.Diagnostic[] = [];
 
@@ -58,7 +58,7 @@ export async function refreshDiagnostics(
         }
     }
 
-    emojiDiagnostics.set(doc.uri, diagnostics);
+    inlinesqlDiagnostics.set(doc.uri, diagnostics);
 }
 
 async function checkRange(
@@ -76,14 +76,21 @@ async function checkRange(
 
     const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
     const sqlStr = doc.getText(range)
-    // const diagnostic = new vscode.Diagnostic(range, sqlStr, vscode.DiagnosticSeverity.Error);
-    // diagnostics.push(diagnostic)
 
+    let errors = null
+    if (configuration.get<boolean>('enableDBIntegration')) {
+        errors = await sqlLint({
+            sql: sqlStr,
+            driver: configuration.get<string>('dbDriver'),
+            host: configuration.get<string>('dbHost'),
+            port: configuration.get<number>('dbPort'),
+            user: configuration.get<string>('dbUser'),
+            password: configuration.get<string>('dbPassword'),
+        })
+    } else {
+        errors = await sqlLint({sql: sqlStr})
+    }
 
-    const errors = await sqlLint({
-        sql: sqlStr,
-        // driver: 'postgres',
-    })
     for (const error of errors) {
         const diagnostic = new vscode.Diagnostic(range, error.error,
             vscode.DiagnosticSeverity.Error);
@@ -95,24 +102,24 @@ async function checkRange(
 
 export async function subscribeToDocumentChanges(
     context: vscode.ExtensionContext,
-    emojiDiagnostics: vscode.DiagnosticCollection,
+    inlinesqlDiagnostics: vscode.DiagnosticCollection,
 ): Promise<void> {
     if (vscode.window.activeTextEditor) {
-        await refreshDiagnostics(vscode.window.activeTextEditor.document, emojiDiagnostics);
+        await refreshDiagnostics(vscode.window.activeTextEditor.document, inlinesqlDiagnostics);
     }
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(editor => {
             if (editor) {
-                refreshDiagnostics(editor.document, emojiDiagnostics);
+                refreshDiagnostics(editor.document, inlinesqlDiagnostics);
             }
         })
     );
 
     context.subscriptions.push(
-        vscode.workspace.onDidChangeTextDocument(e => refreshDiagnostics(e.document, emojiDiagnostics))
+        vscode.workspace.onDidChangeTextDocument(e => refreshDiagnostics(e.document, inlinesqlDiagnostics))
     );
 
     context.subscriptions.push(
-        vscode.workspace.onDidCloseTextDocument(doc => emojiDiagnostics.delete(doc.uri))
+        vscode.workspace.onDidCloseTextDocument(doc => inlinesqlDiagnostics.delete(doc.uri))
     );
 }
