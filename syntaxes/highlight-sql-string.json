@@ -7,14 +7,8 @@
     {
       "begin": "(`|\"\"\"|\"|f\")((--sql)|SELECT |INSERT INTO|DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
-        "1": {
-          "name": "punctuation.definition.string.begin.go"
-        },
         "2": {
           "name": "keyword"
-        },
-        "3": {
-          "name": "punctuation.definition.comment.go"
         }
       },
       "end": "(`|\"\"\"|\")",

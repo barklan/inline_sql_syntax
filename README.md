@@ -1,22 +1,30 @@
-<style>
-td, th {
-   border: none!important;
-}
-</style>
-
 # Inline SQL Syntax
 
 Highlight strings as SQL. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**.
 
 ## Examples:
 
-Python             |  JavaScript/TypeScript
-:-------------------------:|:-------------------------:
-![python example](docs/python.png)  |  ![js example](docs/js.png)
+<table style="width:100%; border: none!important;">
+  <tr>
+    <td>Python</td>
+    <td>JavaScript/TypeScript</td>
+  </tr>
+  <tr>
+    <td><img src="docs/python.png" /></td>
+    <td><img src="docs/js.png" /></td>
+  </tr>
+</table>
 
-Ruby|  Java
-:-------------------------:|:-------------------------:
-![ruby example](docs/ruby.png)  |  ![java example](docs/java.png)
+<table style="width:100%; border: none!important;">
+  <tr>
+    <td>Ruby</td>
+    <td>Java</td>
+  </tr>
+  <tr>
+    <td><img src="docs/ruby.png" /></td>
+    <td><img src="docs/java.png" /></td>
+  </tr>
+</table>
 
 <h3 style="text-align:center;">Go</h3>
 
