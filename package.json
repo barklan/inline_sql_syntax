@@ -9,7 +9,7 @@
         "url": "https://github.com/barklan/inline_sql_syntax"
     },
     "engines": {
-        "vscode": "^1.32.0"
+        "vscode": "^1.52.0"
     },
     "categories": [
         "Programming Languages"
