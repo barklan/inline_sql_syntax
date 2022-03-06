@@ -79,22 +79,29 @@ async function checkRange(
 
     let errors = null
     if (configuration.get<boolean>('enableDBIntegration')) {
-        errors = await sqlLint({
-            sql: sqlStr,
-            driver: configuration.get<string>('dbDriver'),
-            host: configuration.get<string>('dbHost'),
-            port: configuration.get<number>('dbPort'),
-            user: configuration.get<string>('dbUser'),
-            password: configuration.get<string>('dbPassword'),
-        })
+        try {
+            errors = await sqlLint({
+                sql: sqlStr,
+                driver: configuration.get<string>('dbDriver'),
+                host: configuration.get<string>('dbHost'),
+                port: configuration.get<number>('dbPort'),
+                user: configuration.get<string>('dbUser'),
+                password: configuration.get<string>('dbPassword'),
+            })
+        }
+        catch {
+            vscode.window.showInformationMessage('InlineSQL failed to make request to database.');
+        }
     } else {
-        errors = await sqlLint({sql: sqlStr})
+        errors = await sqlLint({ sql: sqlStr })
     }
 
-    for (const error of errors) {
-        const diagnostic = new vscode.Diagnostic(range, error.error,
-            vscode.DiagnosticSeverity.Error);
-        diagnostics.push(diagnostic)
+    if (errors != null) {
+        for (const error of errors) {
+            const diagnostic = new vscode.Diagnostic(range, error.error,
+                vscode.DiagnosticSeverity.Error);
+            diagnostics.push(diagnostic)
+        }
     }
 
     return diagnostics;
