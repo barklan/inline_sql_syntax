@@ -42,7 +42,10 @@
                     "source.ruby",
                     "source.cs",
                     "source.js",
-                    "source.ts"
+                    "source.ts",
+                    "source.vue",
+                    "source.svelte",
+                    "source.tsx"
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"
