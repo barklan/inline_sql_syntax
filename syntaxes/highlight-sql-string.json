@@ -1,6 +1,6 @@
 {
   "fileTypes": [
-    "py", "go", "js", "jsx", "ts", "tsx", "vue", "svelte", "java", "rb", "cs"
+    "py", "go", "js", "ts", "java", "rb", "cs"
   ],
   "injectionSelector": "L:source -comment -string",
   "patterns": [

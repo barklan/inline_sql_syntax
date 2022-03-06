@@ -1,62 +1,49 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subscribeToDocumentChanges = exports.refreshDiagnostics = exports.activate = exports.SQL_FLAG = void 0;
-/** To demonstrate code actions associated with Diagnostics problems, this file provides a mock diagnostics entries. */
+exports.subscribeToDocumentChanges = exports.refreshDiagnostics = exports.activate = exports.PY_SQL = exports.QUOTE_SQL = exports.BACKTICK_SQL = exports.SQL_FLAG = void 0;
 const vscode = require("vscode");
 const sql_lint_1 = require("sql-lint");
-/** String to detect in the text document. */
 exports.SQL_FLAG = '--sql';
-// export function activate(context: vscode.ExtensionContext) {
-// 	const collection = vscode.languages.createDiagnosticCollection('test');
-// 	if (vscode.window.activeTextEditor) {
-// 		refreshDiagnostics(vscode.window.activeTextEditor.document, collection);
-// 	}
-// 	context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(editor => {
-// 		if (editor) {
-// 			refreshDiagnostics(editor.document, collection);
-// 		}
-// 	}));
-// }
+exports.BACKTICK_SQL = '`' + exports.SQL_FLAG;
+exports.QUOTE_SQL = '"' + exports.SQL_FLAG;
+exports.PY_SQL = '"""' + exports.SQL_FLAG;
 async function activate(context) {
     const emojiDiagnostics = vscode.languages.createDiagnosticCollection("emoji");
     context.subscriptions.push(emojiDiagnostics);
     await subscribeToDocumentChanges(context, emojiDiagnostics);
 }
 exports.activate = activate;
-/**
- * Analyzes the text document for problems.
- * This demo diagnostic problem provider finds all mentions of 'emoji'.
- * @param doc text document to analyze
- * @param emojiDiagnostics diagnostic collection
- */
 async function refreshDiagnostics(doc, emojiDiagnostics) {
     let diagnostics = [];
     let sqlStartLine = doc.lineAt(0);
+    let sqlStringBound = "";
     let sqlStartIndex = -1;
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex++) {
         if (sqlStartIndex == -1) {
             const lineOfText = doc.lineAt(lineIndex);
-            if (lineOfText.text.includes(exports.SQL_FLAG)) {
+            if (lineOfText.text.includes(exports.BACKTICK_SQL)) {
                 sqlStartLine = lineOfText;
+                sqlStringBound = '`';
+                sqlStartIndex = lineIndex;
+            }
+            else if (lineOfText.text.includes(exports.QUOTE_SQL)) {
+                sqlStartLine = lineOfText;
+                sqlStringBound = '"';
+                sqlStartIndex = lineIndex;
+            }
+            else if (lineOfText.text.includes(exports.PY_SQL)) {
+                sqlStartLine = lineOfText;
+                sqlStringBound = '"""';
                 sqlStartIndex = lineIndex;
             }
         }
-        else {
+        else if (sqlStringBound != "") {
             const lineOfText = doc.lineAt(lineIndex);
-            let endStr = '-';
-            if (lineOfText.text.includes('`')) {
-                endStr = '`';
-            }
-            else if (lineOfText.text.includes('"')) {
-                endStr = '"';
-            }
-            else if (lineOfText.text.includes('"""')) {
-                endStr = '"""';
-            }
-            if (endStr != '-') {
-                const subDiagnostics = await checkRange(doc, sqlStartLine, sqlStartIndex, lineOfText, lineIndex, endStr);
+            if (lineOfText.text.includes(sqlStringBound)) {
+                const subDiagnostics = await checkRange(doc, sqlStartLine, sqlStartIndex, lineOfText, lineIndex, sqlStringBound);
                 diagnostics.push(...subDiagnostics);
                 sqlStartIndex = -1;
+                sqlStringBound = "";
             }
         }
     }

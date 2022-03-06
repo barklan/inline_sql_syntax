@@ -15,7 +15,13 @@
         "Programming Languages"
     ],
     "activationEvents": [
-        "*"
+        "onLanguage:python",
+        "onLanguage:go",
+        "onLanguage:js",
+        "onLanguage:ts",
+        "onLanguage:java",
+        "onLanguage:ruby",
+        "onLanguage:cs"
     ],
     "main": "./out/extension.js",
     "scripts": {
@@ -36,10 +42,7 @@
                     "source.ruby",
                     "source.cs",
                     "source.js",
-                    "source.ts",
-                    "source.vue",
-                    "source.svelte",
-                    "source.tsx"
+                    "source.ts"
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"

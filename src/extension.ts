@@ -1,25 +1,11 @@
 'use strict';
-
-/** To demonstrate code actions associated with Diagnostics problems, this file provides a mock diagnostics entries. */
-
 import * as vscode from 'vscode';
 import sqlLint from 'sql-lint';
 
-/** String to detect in the text document. */
 export const SQL_FLAG = '--sql';
-
-// export function activate(context: vscode.ExtensionContext) {
-
-// 	const collection = vscode.languages.createDiagnosticCollection('test');
-// 	if (vscode.window.activeTextEditor) {
-// 		refreshDiagnostics(vscode.window.activeTextEditor.document, collection);
-// 	}
-// 	context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(editor => {
-// 		if (editor) {
-// 			refreshDiagnostics(editor.document, collection);
-// 		}
-// 	}));
-// }
+export const BACKTICK_SQL = '`' + SQL_FLAG
+export const QUOTE_SQL = '"' + SQL_FLAG
+export const PY_SQL = '"""' + SQL_FLAG
 
 export async function activate(context: vscode.ExtensionContext) {
     const emojiDiagnostics = vscode.languages.createDiagnosticCollection("emoji");
@@ -29,39 +15,45 @@ export async function activate(context: vscode.ExtensionContext) {
 
 }
 
-
-/**
- * Analyzes the text document for problems.
- * This demo diagnostic problem provider finds all mentions of 'emoji'.
- * @param doc text document to analyze
- * @param emojiDiagnostics diagnostic collection
- */
-export async function refreshDiagnostics(doc: vscode.TextDocument, emojiDiagnostics: vscode.DiagnosticCollection): Promise<void> {
+export async function refreshDiagnostics(
+    doc: vscode.TextDocument,
+    emojiDiagnostics: vscode.DiagnosticCollection
+): Promise<void> {
     let diagnostics: vscode.Diagnostic[] = [];
 
     let sqlStartLine = doc.lineAt(0);
+    let sqlStringBound = "";
     let sqlStartIndex = -1;
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex++) {
         if (sqlStartIndex == -1) {
             const lineOfText = doc.lineAt(lineIndex);
-            if (lineOfText.text.includes(SQL_FLAG)) {
+            if (lineOfText.text.includes(BACKTICK_SQL)) {
                 sqlStartLine = lineOfText;
+                sqlStringBound = '`';
+                sqlStartIndex = lineIndex;
+            } else if (lineOfText.text.includes(QUOTE_SQL)) {
+                sqlStartLine = lineOfText;
+                sqlStringBound = '"';
+                sqlStartIndex = lineIndex;
+            } else if (lineOfText.text.includes(PY_SQL)) {
+                sqlStartLine = lineOfText;
+                sqlStringBound = '"""';
                 sqlStartIndex = lineIndex;
             }
-        } else {
+        } else if (sqlStringBound != "") {
             const lineOfText = doc.lineAt(lineIndex);
-            let endStr = '-';
-            if (lineOfText.text.includes('`')) {
-                endStr = '`'
-            } else if (lineOfText.text.includes('"')) {
-                endStr = '"'
-            } else if (lineOfText.text.includes('"""')) {
-                endStr = '"""'
-            }
-            if (endStr != '-') {
-                const subDiagnostics = await checkRange(doc, sqlStartLine, sqlStartIndex, lineOfText, lineIndex, endStr);
+            if (lineOfText.text.includes(sqlStringBound)) {
+                const subDiagnostics = await checkRange(
+                    doc,
+                    sqlStartLine,
+                    sqlStartIndex,
+                    lineOfText,
+                    lineIndex,
+                    sqlStringBound,
+                );
                 diagnostics.push(...subDiagnostics)
                 sqlStartIndex = -1;
+                sqlStringBound = "";
             }
         }
     }
