@@ -23,7 +23,11 @@ query = "INSERT INTO foo (bar, baz) VALUES ( $1, $2  )";
 And then pass the variables to be replaced when you execute the query. For example with [pgx](https://github.com/JackC/pgx) (Go example):
 
 ```go
-err = conn.QueryRow(context.Background(), "select name, weight from widgets where id=$1", 42).Scan(&name, &weight)
+err = conn.QueryRow(
+    context.Background(),
+    "select name, weight from widgets where id=$1",
+    42,
+).Scan(&name, &weight)
 ```
 
 ## Integration with real database
