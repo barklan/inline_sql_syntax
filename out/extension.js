@@ -20,7 +20,7 @@ async function refreshDiagnostics(doc, inlinesqlDiagnostics) {
     let sqlStringBound = "";
     let sqlStartIndex = -1;
     if (configuration.get('lintSQLFiles') && doc.languageId == 'sql') {
-        vscode.window.showInformationMessage('got here');
+        // vscode.window.showInformationMessage('got here');
         sqlStringBound = 'eof';
         sqlStartIndex = 0;
         var lastLine = doc.lineAt(doc.lineCount - 1);
