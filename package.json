@@ -32,7 +32,7 @@
         "onLanguage:typescript",
         "onLanguage:java",
         "onLanguage:ruby",
-        "onLanguage:cs"
+        "onLanguage:csharp"
     ],
     "main": "./out/extension.js",
     "scripts": {
