@@ -5,18 +5,41 @@
   "injectionSelector": "L:source -comment -string",
   "patterns": [
     {
-      "begin": "(`|\"\"\"|\"|f\")((--sql)|SELECT |INSERT INTO|DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(`)((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
         }
       },
-      "end": "(`|\"\"\"|\")",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.string.end.go"
+      "end": "(`)",
+      "patterns": [
+        {
+          "include": "source.sql"
+        }
+      ]
+    },
+    {
+      "begin": "(\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword"
         }
       },
+      "end": "(\")",
+      "patterns": [
+        {
+          "include": "source.sql"
+        }
+      ]
+    },
+    {
+      "begin": "(\"\"\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword"
+        }
+      },
+      "end": "(\"\"\")",
       "patterns": [
         {
           "include": "source.sql"
