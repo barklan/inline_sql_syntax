@@ -1,51 +1,23 @@
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+
 # Inline SQL Syntax
 
-Highlight strings as SQL. Supported languages are:
-
-- **Python**
-- **Go**
-- **JavaScript**
-- **TypeScript**
-- **Ruby**
-- **Java**
-- **C#**
+Highlight strings as SQL. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**.
 
 ## Examples:
 
-### Go:
+Python             |  JavaScript/TypeScript
+:-------------------------:|:-------------------------:
+![python example](docs/python.png)  |  ![js example](docs/js.png)
 
----
+Ruby|  Java
+:-------------------------:|:-------------------------:
+![ruby example](docs/ruby.png)  |  ![java example](docs/java.png)
+
+<h3 style="text-align:center;">Go</h3>
 
 ![go example](docs/go.png)
-
-<br>
-
-### Python:
-
----
-
-![python example](docs/python.png)
-
-<br>
-
-### JavaScript:
-
----
-
-![js example](docs/js.png)
-
-<br>
-
-### Ruby:
-
----
-
-![ruby example](docs/ruby.png)
-
-<br>
-
-### Java:
-
----
-
-![java example](docs/java.png)

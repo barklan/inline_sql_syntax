@@ -5,7 +5,7 @@
   "injectionSelector": "L:source -comment -string",
   "patterns": [
     {
-      "begin": "(`|\"\"\"|\"|f\")((--sql)|SELECT|INSERT|DELETE|UPDATE|CREATE TABLE)",
+      "begin": "(`|\"\"\"|\"|f\")((--sql)|SELECT |INSERT INTO|DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.string.begin.go"
