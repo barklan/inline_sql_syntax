@@ -19,6 +19,16 @@ async function refreshDiagnostics(doc, inlinesqlDiagnostics) {
     let sqlStartLine = doc.lineAt(0);
     let sqlStringBound = "";
     let sqlStartIndex = -1;
+    if (configuration.get('lintSQLFiles') && doc.languageId == 'sql') {
+        vscode.window.showInformationMessage('got here');
+        sqlStringBound = 'eof';
+        sqlStartIndex = 0;
+        var lastLine = doc.lineAt(doc.lineCount - 1);
+        const subDiagnostics = await checkRange(doc, sqlStartLine, sqlStartIndex, lastLine, doc.lineCount - 1, sqlStringBound);
+        diagnostics.push(...subDiagnostics);
+        inlinesqlDiagnostics.set(doc.uri, diagnostics);
+        return;
+    }
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex++) {
         if (sqlStartIndex == -1) {
             const lineOfText = doc.lineAt(lineIndex);
@@ -53,27 +63,45 @@ async function refreshDiagnostics(doc, inlinesqlDiagnostics) {
 exports.refreshDiagnostics = refreshDiagnostics;
 async function checkRange(doc, lineOfTextStart, lineIndexStart, lineOfTextEnd, lineIndexEnd, endStr) {
     const diagnostics = [];
-    const indexStart = lineOfTextStart.text.indexOf(exports.SQL_FLAG);
-    const indexEnd = lineOfTextEnd.text.indexOf(endStr);
-    const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
-    const sqlStr = doc.getText(range);
+    let endChar = lineIndexEnd.toExponential.length - 1;
+    if (endChar == -1) {
+        endChar = 0;
+    }
+    const range = new vscode.Range(lineIndexStart, 0, lineIndexEnd, endChar);
+    var sqlStr = '';
+    if (endStr == 'eof') {
+        sqlStr = doc.getText();
+    }
+    else {
+        let indexStart = lineOfTextStart.text.indexOf(exports.SQL_FLAG);
+        let indexEnd = lineOfTextEnd.text.indexOf(endStr);
+        const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
+        sqlStr = doc.getText(range);
+    }
     let errors = null;
     if (configuration.get('enableDBIntegration')) {
-        errors = await (0, sql_lint_1.default)({
-            sql: sqlStr,
-            driver: configuration.get('dbDriver'),
-            host: configuration.get('dbHost'),
-            port: configuration.get('dbPort'),
-            user: configuration.get('dbUser'),
-            password: configuration.get('dbPassword'),
-        });
+        try {
+            errors = await (0, sql_lint_1.default)({
+                sql: sqlStr,
+                driver: configuration.get('dbDriver'),
+                host: configuration.get('dbHost'),
+                port: configuration.get('dbPort'),
+                user: configuration.get('dbUser'),
+                password: configuration.get('dbPassword'),
+            });
+        }
+        catch {
+            vscode.window.showInformationMessage('InlineSQL failed to make request to database.');
+        }
     }
     else {
         errors = await (0, sql_lint_1.default)({ sql: sqlStr });
     }
-    for (const error of errors) {
-        const diagnostic = new vscode.Diagnostic(range, error.error, vscode.DiagnosticSeverity.Error);
-        diagnostics.push(diagnostic);
+    if (errors != null) {
+        for (const error of errors) {
+            const diagnostic = new vscode.Diagnostic(range, error.error, vscode.DiagnosticSeverity.Error);
+            diagnostics.push(diagnostic);
+        }
     }
     return diagnostics;
 }
