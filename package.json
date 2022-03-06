@@ -1,19 +1,46 @@
 {
     "name": "inline-sql-syntax",
-    "displayName": "Inline SQL Syntax",
-    "description": "Highlight strings as SQL. Python, Go, JS, TS, Ruby, Java, C#.",
-    "version": "2.5.1",
+    "displayName": "Inline SQL",
+    "description": "Highlight and lint SQL strings. Python, Go, JS, TS, Ruby, Java, C#.",
+    "version": "2.6.0",
+    "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
+    "license": "MIT",
     "icon": "docs/logo.png",
     "repository": {
         "url": "https://github.com/barklan/inline_sql_syntax"
     },
+    "homepage": "https://github.com/barklan/inline_sql_syntax",
     "engines": {
-        "vscode": "^1.32.0"
+        "vscode": "^1.52.0"
     },
     "categories": [
-        "Programming Languages"
+        "Linters",
+        "Other"
     ],
+    "keywords": [
+        "sql",
+        "postgres",
+        "mysql",
+        "lint",
+        "inline"
+    ],
+    "activationEvents": [
+        "onLanguage:python",
+        "onLanguage:go",
+        "onLanguage:js",
+        "onLanguage:ts",
+        "onLanguage:java",
+        "onLanguage:ruby",
+        "onLanguage:cs"
+    ],
+    "main": "./out/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint . --ext .ts,.tsx",
+        "watch": "tsc -watch -p ./"
+    },
     "contributes": {
         "grammars": [
             {
@@ -35,6 +62,56 @@
                     "meta.embedded.sql": "sql"
                 }
             }
-        ]
+        ],
+        "configuration": {
+            "title": "inline-sql-syntax",
+            "properties": {
+                "inlineSQL.enableDBIntegration": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable linting using real database."
+                },
+                "inlineSQL.dbDriver": {
+                    "type": "string",
+                    "default": "postgres",
+                    "description": "Driver to use for verifying queries. It currently supports MySQL and Postgres.",
+                    "enum": [
+                        "mysql",
+                        "postgres"
+                    ]
+                },
+                "inlineSQL.dbHost": {
+                    "type": "string",
+                    "default": "localhost",
+                    "markdownDescription": "Database host address."
+                },
+                "inlineSQL.dbPort": {
+                    "type": "number",
+                    "default": 5432,
+                    "markdownDescription": "Database port."
+                },
+                "inlineSQL.dbUser": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database user."
+                },
+                "inlineSQL.dbPassword": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database password."
+                }
+            }
+        }
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "@types/vscode": "^1.65.0",
+        "@typescript-eslint/eslint-plugin": "^5.13.0",
+        "@typescript-eslint/parser": "^5.13.0",
+        "eslint": "^8.10.0",
+        "typescript": "^4.6.2"
+    },
+    "dependencies": {
+        "sql-lint": "^0.0.19"
     }
 }
