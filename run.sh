@@ -33,7 +33,7 @@ up:db() (
 publish() (
     npm run vscode:prepublish
     vsce package
-    vsce publish patch
+    vsce publish
 )
 
 # -----------------------------------------------------------------------------
