@@ -1,6 +1,6 @@
-# Inline SQL Syntax
+# Inline SQL
 
-Highlight strings as SQL. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**.
+Highlight and lint SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**.
 
 ## Examples:
 
