@@ -24,6 +24,26 @@ export async function refreshDiagnostics(
     let sqlStartLine = doc.lineAt(0);
     let sqlStringBound = "";
     let sqlStartIndex = -1;
+
+    if (configuration.get<boolean>('lintSQLFiles') && doc.languageId == 'sql') {
+        // vscode.window.showInformationMessage('got here');
+        sqlStringBound = 'eof';
+        sqlStartIndex = 0;
+        var lastLine = doc.lineAt(doc.lineCount - 1);
+        const subDiagnostics = await checkRange(
+            doc,
+            sqlStartLine,
+            sqlStartIndex,
+            lastLine,
+            doc.lineCount - 1,
+            sqlStringBound,
+        );
+        diagnostics.push(...subDiagnostics)
+
+        inlinesqlDiagnostics.set(doc.uri, diagnostics);
+        return
+    }
+
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex++) {
         if (sqlStartIndex == -1) {
             const lineOfText = doc.lineAt(lineIndex);
@@ -71,11 +91,21 @@ async function checkRange(
 ): Promise<vscode.Diagnostic[]> {
     const diagnostics: vscode.Diagnostic[] = [];
 
-    const indexStart = lineOfTextStart.text.indexOf(SQL_FLAG);
-    const indexEnd = lineOfTextEnd.text.indexOf(endStr);
+    let endChar = lineIndexEnd.toExponential.length -1
+    if (endChar == -1) {
+        endChar = 0
+    }
+    const range = new vscode.Range(lineIndexStart, 0, lineIndexEnd, endChar);
 
-    const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
-    const sqlStr = doc.getText(range)
+    var sqlStr = '';
+    if (endStr == 'eof') {
+        sqlStr = doc.getText()
+    } else {
+        let indexStart = lineOfTextStart.text.indexOf(SQL_FLAG);
+        let indexEnd = lineOfTextEnd.text.indexOf(endStr);
+        const range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
+        sqlStr = doc.getText(range)
+    }
 
     let errors = null
     if (configuration.get<boolean>('enableDBIntegration')) {

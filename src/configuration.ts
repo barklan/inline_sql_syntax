@@ -13,6 +13,7 @@ export type Configuration = {
   dbPort: number;
   dbUser: string;
   dbPassword: string;
+  lintSQLFiles: boolean;
 };
 
 export function getConfiguration() {

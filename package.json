@@ -2,7 +2,7 @@
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings. Python, Go, JS, TS, Ruby, Java, C#.",
-    "version": "2.6.3",
+    "version": "2.7.0",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
@@ -32,7 +32,8 @@
         "onLanguage:typescript",
         "onLanguage:java",
         "onLanguage:ruby",
-        "onLanguage:csharp"
+        "onLanguage:csharp",
+        "onLanguage:sql"
     ],
     "main": "./out/extension.js",
     "browser": "./out/extension.js",
@@ -104,6 +105,11 @@
                     "type": "string",
                     "default": "postgres",
                     "markdownDescription": "Database password."
+                },
+                "inlineSQL.lintSQLFiles": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable linting for SQL files."
                 }
             }
         }
