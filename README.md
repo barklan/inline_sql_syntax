@@ -63,3 +63,13 @@ Syntax highlighting works for strings starting with `--sql` or any of the `SELEC
 ![go example](docs/go.png)
 
 Currently gopls semantic token highligting (option `gopls.ui.semanticTokens` -  off by default) overrides extention's syntax. If anyone knows how to fix this, please share.
+
+## Motivation
+
+This small extention is meant to help those who don't use ORM and don't like SQL builders like [squirrel](https://github.com/Masterminds/squirrel), but still what inline sql in their code to be something more than magic strings, helping to avoid small bugs and typos almost instantly.
+
+## Related
+
+- [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) - Used for linting.
+- [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server) - SQL Language Server, consider it if you use separate files for sql.
+- [cmoog/vscode-sql-notebook](https://github.com/cmoog/vscode-sql-notebook) - Open SQL files as VSCode Notebooks.
