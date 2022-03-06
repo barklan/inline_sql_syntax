@@ -29,3 +29,5 @@ Highlight strings as SQL. Supported languages are **Python**, **Go**, **JavaScri
 <h3 style="text-align:center;">Go</h3>
 
 ![go example](docs/go.png)
+
+Currently gopls semantic token highligting overrides extention's (option `gopls.ui.semanticTokens`). If anyone knows how to fix this, please tell me.
