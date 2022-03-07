@@ -1,4 +1,4 @@
-# Inline SQL
+# Inline SQL ![](https://img.shields.io/visual-studio-marketplace/i/qufiwefefwoyn.inline-sql-syntax)
 
 ![python](docs/py_lint.png)
 
