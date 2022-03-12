@@ -1,7 +1,7 @@
 {
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
-    "description": "Highlight and lint SQL strings. Python, Go, JS, TS, Ruby, Java, C#.",
+    "description": "Highlight and lint SQL strings and SQL files. Python, Go, JS, TS, Ruby, Java, C#.",
     "version": "2.7.0",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
