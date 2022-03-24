@@ -62,7 +62,8 @@
                     "source.ts",
                     "source.vue",
                     "source.svelte",
-                    "source.tsx"
+                    "source.tsx",
+                    "source.rust"
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"
