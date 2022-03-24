@@ -2,7 +2,7 @@
 
 ![python](docs/py_lint.png)
 
-Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**.
+Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**.
 
 Syntax highlighting works for strings starting with `--sql` or any of the `SELECT `, `INSERT `, `INTO `, `DELETE `, `UPDATE `, `CREATE TABLE `. Linting and diagnostics powered entirely by awesome [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for multiline strings that start with `--sql`.
 
@@ -61,7 +61,6 @@ Integration with real database is available and controlled through VSCode option
 
 ![go](docs/go_lint2.png)
 
-
 ## More syntax highlighting examples
 
 <table style="width:100%; border: none!important;">
@@ -90,12 +89,17 @@ Integration with real database is available and controlled through VSCode option
 
 ![go example](docs/go.png)
 
-Currently gopls semantic token highligting (option `gopls.ui.semanticTokens` -  off by default) overrides extention's syntax. If anyone knows how to fix this, please share.
+Currently gopls semantic token highlighting (option `gopls.ui.semanticTokens` -  off by default) overrides extension's syntax. If anyone knows how to fix this, please share.
 
+<h3 style="text-align:center;">Rust</h3>
+
+![rust](docs/rust.png)
+
+If used alongside `rust-analyzer`, the setting `"rust-analyzer.highlighting.strings": false` has to be set, otherwise the string semantic token will override the syntax highlight of this extension.
 
 ## Motivation
 
-This small extention is meant to help those who don't use ORM and don't like SQL builders like [squirrel](https://github.com/Masterminds/squirrel), but still what inline sql in their code to be something more than magic strings, helping to avoid small bugs and typos almost instantly.
+This small extension is meant to help those who don't use ORM and don't like SQL builders like [squirrel](https://github.com/Masterminds/squirrel), but still what inline sql in their code to be something more than magic strings, helping to avoid small bugs and typos almost instantly.
 
 ## Related
 
