@@ -13,6 +13,7 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run lint
+      - run: npm run vscode:prepublish
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
         with:
