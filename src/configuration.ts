@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+
 export const PREFIX = 'inlineSQL';
 
 export enum DRIVER {

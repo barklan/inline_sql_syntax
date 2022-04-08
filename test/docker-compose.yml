@@ -10,7 +10,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
       # THIS IS UNSAFE!
       - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=app
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
     ports:
@@ -18,17 +18,16 @@ services:
 
   pgweb:
     container_name: pgweb
-    restart: always
     image: sosedoff/pgweb
     ports:
       - "8081:8081"
     links:
       - db:db
     environment:
-      - POSTGRES_DB=app
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/app?sslmode=disable
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres?sslmode=disable
     depends_on:
       - db
 
