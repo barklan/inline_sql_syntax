@@ -2,7 +2,7 @@
 
 ![python](docs/py_lint.png)
 
-Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**.
+Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**, **PHP**.
 
 Syntax highlighting works for strings starting with `--sql` or any of the `SELECT `, `INSERT `, `INTO `, `DELETE `, `UPDATE `, `CREATE TABLE `. Linting and diagnostics powered entirely by awesome [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for multiline strings that start with `--sql`.
 
