@@ -1,10 +1,10 @@
-# Inline SQL ![](https://img.shields.io/visual-studio-marketplace/i/qufiwefefwoyn.inline-sql-syntax)
+# Inline SQL ![shield](https://img.shields.io/visual-studio-marketplace/i/qufiwefefwoyn.inline-sql-syntax)
 
 ![python](docs/py_lint.png)
 
 Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**, **PHP**.
 
-Syntax highlighting works for strings starting with `--sql` or any of the `SELECT `, `INSERT `, `INTO `, `DELETE `, `UPDATE `, `CREATE TABLE `. Linting and diagnostics powered entirely by awesome [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for multiline strings that start with `--sql`.
+Syntax highlighting works for strings starting with `--sql` or any of the `SELECT`, `INSERT`, `INTO`, `DELETE`, `UPDATE`, `CREATE TABLE`. Linting and diagnostics powered entirely by awesome [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for multiline strings that start with `--sql`.
 
 ## Safety
 
@@ -16,7 +16,7 @@ query = f"INSERT INTO foo (bar, baz) VALUES ( {variable1}, {variable2} )";
 
 Instead, use `$` placeholders (or `?` in some databases):
 
-```
+```python
 query = "INSERT INTO foo (bar, baz) VALUES ( $1, $2  )";
 ```
 
@@ -47,15 +47,15 @@ Integration with real database is available and controlled through VSCode option
 
 ## Examples
 
-**Python**
+### Python
 
 ![python](docs/py_lint.png)
 
-**JavaScript/TypeScript**
+### JavaScript/TypeScript
 
 ![js](docs/js_lint.png)
 
-**Go**
+### Go
 
 ![go](docs/go_lint.png)
 
