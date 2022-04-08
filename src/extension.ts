@@ -46,13 +46,14 @@ async function checkRange(
                 port: configuration.get<number>('dbPort'),
                 user: configuration.get<string>('dbUser'),
                 password: configuration.get<string>('dbPassword'),
-                verbosity: 1,
             });
+            log.appendLine(`${errors.length} errors found`);
         } catch {
             log.appendLine('failed to make database request');
         }
     } else {
         errors = await sqlLint({ sql: sqlStr });
+        log.appendLine(`${errors.length} errors found`);
     }
 
     if (errors != null) {
@@ -63,7 +64,6 @@ async function checkRange(
                 vscode.DiagnosticSeverity.Error,
             );
             diagnostics.push(diagnostic);
-            log.appendLine('1 new problem found');
         }
     }
 
