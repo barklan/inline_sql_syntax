@@ -171,7 +171,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const log = vscode.window.createOutputChannel('Inline SQL');
     log.show();
-    vscode.window.showInformationMessage('fuck!');
 
     await subscribeToDocumentChanges(context, inlinesqlDiagnostics, log);
 }
