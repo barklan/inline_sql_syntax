@@ -1,8 +1,8 @@
 {
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
-    "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#.",
-    "version": "2.8.0",
+    "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
+    "version": "2.9.0",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
@@ -34,7 +34,8 @@
         "onLanguage:ruby",
         "onLanguage:csharp",
         "onLanguage:rust",
-        "onLanguage:sql"
+        "onLanguage:sql",
+        "onLanguage:php"
     ],
     "main": "./out/extension.js",
     "browser": "./out/extension.js",
@@ -64,7 +65,8 @@
                     "source.vue",
                     "source.svelte",
                     "source.tsx",
-                    "source.rust"
+                    "source.rust",
+                    "text.html.php"
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"

@@ -11,9 +11,13 @@
     "java",
     "rb",
     "cs",
-    "rs"
+    "rs",
+    "php"
   ],
-  "injectionSelector": "L:source -comment -string",
+  "injectionSelector": [
+    "text.html.php",
+    "L:source -comment -string"
+  ],
   "patterns": [
     {
       "comment": "Rust multi-line raw strings",
