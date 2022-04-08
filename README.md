@@ -2,9 +2,11 @@
 
 ![python](docs/py_lint.png)
 
-Highlight and lint inline SQL strings. Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**, **PHP**.
+Highlight and lint inline SQL strings.
+Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ruby**, **Java**, **C#**, **Rust**, **PHP**.
 
-Syntax highlighting works for strings starting with `--sql` or any of the `SELECT`, `INSERT`, `INTO`, `DELETE`, `UPDATE`, `CREATE TABLE`.
+Syntax highlighting works for strings starting with `--sql` or any of
+the `SELECT`, `INSERT`, `INTO`, `DELETE`, `UPDATE`, `CREATE TABLE`.
 
 **Linting and diagnostics powered entirely by awesome
 [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for
@@ -13,7 +15,9 @@ multiline strings that start with either <code>\`--sql</code> (backtick followed
 
 ## Safety
 
-The proper way to sanitize data for insertion into your database is to use placeholders for all variables to be inserted into your SQL strings. In other words, NEVER do this (Python example):
+The proper way to sanitize data for insertion into your database is to
+use placeholders for all variables to be inserted into your SQL strings.
+In other words, NEVER do this (Python example):
 
 ```python
 query = f"INSERT INTO foo (bar, baz) VALUES ( {variable1}, {variable2} )";
@@ -25,7 +29,8 @@ Instead, use `$` placeholders (or `?` in some databases):
 query = "INSERT INTO foo (bar, baz) VALUES ( $1, $2  )";
 ```
 
-And then pass the variables to be replaced when you execute the query. For example with [pgx](https://github.com/JackC/pgx) (Go example):
+And then pass the variables to be replaced when you execute the query.
+For example with [pgx](https://github.com/JackC/pgx) (Go example):
 
 ```go
 err = conn.QueryRow(
@@ -94,17 +99,22 @@ Integration with real database is available and controlled through VSCode option
 
 ![go example](docs/go.png)
 
-Currently gopls semantic token highlighting (option `gopls.ui.semanticTokens` -  off by default) overrides extension's syntax. If anyone knows how to fix this, please share.
+Currently gopls semantic token highlighting (option `gopls.ui.semanticTokens` -  off by default)
+overrides extension's syntax. If anyone knows how to fix this, please share.
 
 <h3 style="text-align:center;">Rust</h3>
 
 ![rust](docs/rust.png)
 
-If used alongside `rust-analyzer`, the setting `"rust-analyzer.highlighting.strings": false` has to be set, otherwise the string semantic token will override the syntax highlight of this extension.
+If used alongside `rust-analyzer`, the setting `"rust-analyzer.highlighting.strings": false` has to be set,
+otherwise the string semantic token will override the syntax highlight of this extension.
 
 ## Motivation
 
-This small extension is meant to help those who don't use ORM and don't like SQL builders like [squirrel](https://github.com/Masterminds/squirrel), but still what inline sql in their code to be something more than magic strings, helping to avoid small bugs and typos almost instantly.
+This small extension is meant to help those who don't use ORM and don't like SQL builders
+like [squirrel](https://github.com/Masterminds/squirrel),
+but still want inline sql in their code to be something more than magic strings,
+helping to avoid small bugs and typos almost instantly.
 
 ## Related
 
