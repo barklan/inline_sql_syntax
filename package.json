@@ -71,6 +71,16 @@
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"
                 }
+            },
+            {
+                "path": "./syntaxes/php-multiline.json",
+                "scopeName": "php-multiline.injection",
+                "injectTo": [
+                    "text.html.php"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
             }
         ],
         "configuration": {

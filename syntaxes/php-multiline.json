@@ -1,0 +1,33 @@
+{
+    "scopeName": "php-multiline.injection",
+    "fileTypes": [
+        "php",
+        "php4",
+        "php5"
+    ],
+    "injectionSelector": [
+        "text.html.php"
+    ],
+    "patterns": [
+        {
+            "comment": "PHP multi-line strings",
+            "begin": "(<<<)(SQL)",
+            "beginCaptures": {
+                "2": {
+                    "name": "entity.name.tag"
+                }
+            },
+            "end": "^\\s*(SQL);",
+            "endCaptures": {
+                "1": {
+                    "name": "entity"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        }
+    ]
+}
