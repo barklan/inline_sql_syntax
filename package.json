@@ -2,7 +2,7 @@
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
-    "version": "2.10.0",
+    "version": "2.10.1",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
