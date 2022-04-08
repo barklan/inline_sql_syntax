@@ -18,11 +18,11 @@ export type Configuration = {
 };
 
 export function getConfiguration() {
-  return vscode.workspace.getConfiguration();
+    return vscode.workspace.getConfiguration();
 }
 
 export function get<T>(key: keyof Configuration): T {
-  return (getConfiguration().get<Configuration>(
-    `${PREFIX}.${key}`,
-  ) as unknown) as T;
+    return (getConfiguration().get<Configuration>(
+        `${PREFIX}.${key}`,
+    ) as unknown) as T;
 }

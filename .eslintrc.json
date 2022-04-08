@@ -17,6 +17,7 @@
         "eslint-plugin-import"
     ],
     "rules": {
+        "indent": ["error", 4],
         "import/extensions": [
             "error",
             "ignorePackages",
