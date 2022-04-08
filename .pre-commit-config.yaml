@@ -1,4 +1,3 @@
-exclude: '^out/'
 default_stages: [commit]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -41,8 +40,6 @@ repos:
     rev: v0.31.1
     hooks:
       - id: markdownlint
-        args:
-          - "--disable=MD013"
 ci:
   autofix_commit_msg: |
     [pre-commit.ci] auto fixes from pre-commit.com hooks
