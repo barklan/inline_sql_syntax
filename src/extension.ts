@@ -179,7 +179,6 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(inlinesqlDiagnostics);
 
     const log = vscode.window.createOutputChannel('Inline SQL');
-    log.show();
     log.appendLine('inline SQL activated');
 
     await subscribeToDocumentChanges(context, inlinesqlDiagnostics, log);
