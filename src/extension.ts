@@ -100,6 +100,7 @@ export async function refreshDiagnostics(
         return;
     }
 
+    let sqlStringCnt = 0;
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex += 1) {
         if (sqlStartIndex === -1) {
             const lineOfText = doc.lineAt(lineIndex);
@@ -119,6 +120,7 @@ export async function refreshDiagnostics(
         } else if (sqlStringBound !== '') {
             const lineOfText = doc.lineAt(lineIndex);
             if (lineOfText.text.includes(sqlStringBound)) {
+                sqlStringCnt += 1;
                 const subDiagnostics = await checkRange( // eslint-disable-line no-await-in-loop
                     log,
                     doc,
@@ -134,6 +136,11 @@ export async function refreshDiagnostics(
             }
         }
     }
+    const now = new Date().toISOString();
+    if (sqlStringBound !== '') {
+        log.appendLine(`${now}: SQL string was not closed.`);
+    }
+    log.appendLine(`${now}: ${sqlStringCnt} SQL strings found and linted`);
 
     inlinesqlDiagnostics.set(doc.uri, diagnostics);
 }
@@ -154,7 +161,8 @@ export async function subscribeToDocumentChanges(
     context.subscriptions.push(
         vscode.workspace.onDidSaveTextDocument(
             (e) => {
-                log.appendLine('document saved, refreshing diagnostics');
+                const now = new Date().toISOString();
+                log.appendLine(`${now}: document saved, refreshing diagnostics`);
                 refreshDiagnostics(e, inlinesqlDiagnostics, log);
             },
         ),
@@ -163,6 +171,7 @@ export async function subscribeToDocumentChanges(
     context.subscriptions.push(
         vscode.workspace.onDidCloseTextDocument((doc) => inlinesqlDiagnostics.delete(doc.uri)),
     );
+    log.appendLine('watching active editors');
 }
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -171,6 +180,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const log = vscode.window.createOutputChannel('Inline SQL');
     log.show();
+    log.appendLine('inline SQL activated');
 
     await subscribeToDocumentChanges(context, inlinesqlDiagnostics, log);
 }
