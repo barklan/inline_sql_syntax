@@ -26,7 +26,12 @@ function _use_env {
 
 # ----------------------------------------------------------------------------
 
+up() (
+    npm run watch
+)
+
 up:db() (
+    cd test
     docker-compose up
 )
 

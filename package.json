@@ -2,7 +2,7 @@
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
-    "version": "2.9.0",
+    "version": "2.10.1",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
@@ -131,10 +131,12 @@
     "devDependencies": {
         "@types/node": "^17.0.21",
         "@types/vscode": "^1.63.0",
-        "@typescript-eslint/eslint-plugin": "^5.13.0",
-        "@typescript-eslint/parser": "^5.13.0",
+        "@typescript-eslint/eslint-plugin": "^5.18.0",
+        "@typescript-eslint/parser": "^5.18.0",
         "esbuild": "^0.14.25",
-        "eslint": "^8.10.0",
+        "eslint": "^8.12.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.26.0",
         "typescript": "^4.6.2"
     },
     "dependencies": {
