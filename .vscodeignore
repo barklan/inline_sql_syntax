@@ -10,4 +10,3 @@ tslint.json
 run.sh
 docker-compose.yml
 docs/**
-
