@@ -2,9 +2,9 @@ import * as vscode from 'vscode';
 
 export const PREFIX = 'inlineSQL';
 
-export enum DRIVER {
-  mysql = 'mysql',
-  postgres = 'postgres',
+export enum DRIVER { // eslint-disable-line no-shadow
+  mysql = 'mysql', // eslint-disable-line no-unused-vars
+  postgres = 'postgres', // eslint-disable-line no-unused-vars
 }
 
 export type Configuration = {
