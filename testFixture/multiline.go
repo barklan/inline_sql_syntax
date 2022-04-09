@@ -8,7 +8,7 @@ select * from book where id = 34;
 `
 
 	another := `--sql
-select * from book where id = 34;
+select * from journal where id = 34;
 `
 
 	notQuery := `
@@ -18,7 +18,7 @@ Also, I hate manual testing.;
 `
 
 	more := `--sql
-	select * from book where id = 34;
+	select * from user where id = 34;
 `
 
 	print(query, another, more, notQuery)
