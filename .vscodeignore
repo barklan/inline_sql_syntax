@@ -9,4 +9,8 @@ vsc-extension-quickstart.md
 tslint.json
 run.sh
 docker-compose.yml
+.markdownlint.yaml
+.pre-commit-config.yaml
 docs/**
+.github/**
+test/**
