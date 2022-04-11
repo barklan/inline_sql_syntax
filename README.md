@@ -1,5 +1,7 @@
 # Inline SQL ![shield](https://img.shields.io/visual-studio-marketplace/i/qufiwefefwoyn.inline-sql-syntax)
 
+>Also available in [Open VSX Registry](https://open-vsx.org/extension/qufiwefefwoyn/inline-sql-syntax)
+
 ![python](docs/py_lint.png)
 
 Highlight and lint inline SQL strings.
