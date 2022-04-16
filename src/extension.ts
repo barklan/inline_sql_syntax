@@ -2,10 +2,10 @@ import * as vscode from 'vscode';
 import sqlLint from 'sql-lint';
 import * as configuration from './configuration';
 
-export const SQL_FLAG = '--sql';
-export const BACKTICK_SQL = `\`${SQL_FLAG}`;
-export const QUOTE_SQL = `"${SQL_FLAG}`;
-export const PY_SQL = `"""${SQL_FLAG}`;
+export const SQL_FLAG = /-- ?sql/g;
+export const BACKTICK_SQL = '`--';
+export const QUOTE_SQL = '"--';
+// export const PY_SQL = `"""${SQL_FLAG}`;
 
 async function checkRange(
     log: vscode.OutputChannel,
@@ -28,7 +28,14 @@ async function checkRange(
     if (endStr === 'eof') {
         sqlStr = doc.getText();
     } else {
-        const indexStart = lineOfTextStart.text.indexOf(SQL_FLAG);
+        const lineStr = lineOfTextStart.text;
+        const reSearch = SQL_FLAG.exec(lineStr);
+        let indexStart = 0;
+        if (reSearch === null) {
+            log.appendLine('something went wrong');
+            return diagnostics;
+        }
+        indexStart = reSearch.index;
         const indexEnd = lineOfTextEnd.text.indexOf(endStr);
         range = new vscode.Range(lineIndexStart, indexStart, lineIndexEnd, indexEnd);
         sqlStr = doc.getText(range);
@@ -112,10 +119,10 @@ export async function refreshDiagnostics(
                 sqlStartLine = lineOfText;
                 sqlStringBound = '"';
                 sqlStartIndex = lineIndex;
-            } else if (lineOfText.text.includes(PY_SQL)) {
-                sqlStartLine = lineOfText;
-                sqlStringBound = '"""';
-                sqlStartIndex = lineIndex;
+            // } else if (lineOfText.text.includes(PY_SQL)) {
+            //     sqlStartLine = lineOfText;
+            //     sqlStringBound = '"""';
+            //     sqlStartIndex = lineIndex;
             }
         } else if (sqlStringBound !== '') {
             const lineOfText = doc.lineAt(lineIndex);
