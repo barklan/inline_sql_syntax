@@ -22,7 +22,7 @@
   "patterns": [
     {
       "comment": "Rust multi-line raw strings",
-      "begin": "(b?r)(#*)(\")(--sql)",
+      "begin": "(b?r)(#*)(\")(-- ?sql)",
       "beginCaptures": {
         "1": {
           "name": "string.quoted.byte.raw.rust"
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "begin": "(`)((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(`)((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "begin": "(\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "begin": "(\"\"\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(\"\"\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"

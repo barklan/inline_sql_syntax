@@ -27,6 +27,11 @@
 			"command": "bash -i run.sh package",
 		},
 		{
+			"label": "r/publish:pre",
+			"type": "shell",
+			"command": "bash -i run.sh publish:pre",
+		},
+		{
 			"label": "r/publish",
 			"type": "shell",
 			"command": "bash -i run.sh publish",

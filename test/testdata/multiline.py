@@ -5,3 +5,5 @@ query = """--sql
 another = """--sql
     delete * from book;
 """
+
+oneline = "-- sql; SELECT * from user;"
