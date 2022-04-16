@@ -39,8 +39,14 @@ package() (
     vsce package
 )
 
+publish:pre() (
+    vsce publish --pre-release
+)
+
 publish() (
+    _use_env
     vsce publish
+    npx ovsx publish -p "$OVSX_TOKEN"
 )
 
 # -----------------------------------------------------------------------------
