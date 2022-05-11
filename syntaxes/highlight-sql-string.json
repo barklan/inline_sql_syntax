@@ -53,7 +53,7 @@
       ]
     },
     {
-      "begin": "(`)((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(`)((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |OFFSET |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "begin": "(\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |OFFSET |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "begin": "(\"\"\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "begin": "(\"\"\")((-- ?sql)|SELECT |INSERT INTO |DELETE |UPDATE |OFFSET |CREATE TABLE)",
       "beginCaptures": {
         "2": {
           "name": "keyword"
