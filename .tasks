@@ -1,0 +1,4 @@
+[pg-start]
+command=docker run --rm  --name db -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 postgres
+output=terminal
+cwd=<root>
