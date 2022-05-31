@@ -11,7 +11,15 @@ cwd=<root>
 [package]
 command=vsce package
 cwd=<root>
+save=2
 
 [publish]
 command=vsce publish
 cwd=<root>
+save=2
+
+[run-vscode]
+command=code --extensionDevelopmentPath=$PWD
+silent=1
+cwd=<root>
+save=2
