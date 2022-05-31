@@ -1,6 +1,6 @@
 # Inline SQL ![shield](https://img.shields.io/visual-studio-marketplace/i/qufiwefefwoyn.inline-sql-syntax)
 
->Also available in [Open VSX Registry](https://open-vsx.org/extension/qufiwefefwoyn/inline-sql-syntax)
+> Also available in [Open VSX Registry](https://open-vsx.org/extension/qufiwefefwoyn/inline-sql-syntax)
 
 ![python](docs/py_lint.png)
 
@@ -48,12 +48,12 @@ Integration with real database is available and controlled through VSCode option
 
 ```json
 {
-    "inlineSQL.enableDBIntegration": true,
-    "inlineSQL.dbDriver": "postgres",
-    "inlineSQL.dbHost": "localhost",
-    "inlineSQL.dbPort": 5432,
-    "inlineSQL.dbUser": "postgres",
-    "inlineSQL.dbPassword": "postgres"
+  "inlineSQL.enableDBIntegration": true,
+  "inlineSQL.dbDriver": "postgres",
+  "inlineSQL.dbHost": "localhost",
+  "inlineSQL.dbPort": 5432,
+  "inlineSQL.dbUser": "postgres",
+  "inlineSQL.dbPassword": "postgres"
 }
 ```
 
@@ -99,17 +99,38 @@ Integration with real database is available and controlled through VSCode option
 
 <h3 style="text-align:center;">Go</h3>
 
-![go example](docs/go.png)
+## Limitations
 
-Currently gopls semantic token highlighting (option `gopls.ui.semanticTokens` -  off by default)
-overrides extension's syntax. If anyone knows how to fix this, please share.
+### Semantic highlighting
 
-<h3 style="text-align:center;">Rust</h3>
+Highlighting does not work with semantic token highlighting enabled (feature provided by some LSP servers).
 
-![rust](docs/rust.png)
+Currently gopls semantic token highlighting (option `gopls.ui.semanticTokens` - off by default)
+overrides extension's syntax.
 
-If used alongside `rust-analyzer`, the setting `"rust-analyzer.highlighting.strings": false` has to be set,
-otherwise the string semantic token will override the syntax highlight of this extension.
+#### gopls
+
+```json
+{
+  "gopls.ui.semanticTokens": false
+}
+```
+
+#### rust-analyzer
+
+```json
+{
+  "rust-analyzer.highlighting.strings": false
+}
+```
+
+#### `C#`
+
+```json
+{
+  "csharp.semanticHighlighting.enabled": false
+}
+```
 
 ## Motivation
 
