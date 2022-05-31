@@ -1,5 +1,5 @@
 query = """--sql
-    SELECT 'id', 'name', 'age' FROM user;
+    SELECT 'id', 'name', 'age' FROM book;
 """
 
 another = """--sql

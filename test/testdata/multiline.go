@@ -21,5 +21,10 @@ Also, I hate manual testing.;
 	select * from book where id = 34;
 `
 
-	print(query, another, more, notQuery)
+	more2 := `
+--sql
+select * from book where id = 34;
+`
+
+	print(query, another, more, notQuery, more2)
 }

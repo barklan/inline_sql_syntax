@@ -9,7 +9,7 @@
     "patterns": [
         {
             "comment": "C# multi-lines strings",
-            "begin": "(@\")(--sql)",
+            "begin": "(@\")(--\\s*sql)",
             "beginCaptures": {
                 "2": {
                     "name": "comment.sql"
