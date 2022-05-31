@@ -1,0 +1,26 @@
+{
+  "scopeName": "c-sharp-multiline.injection",
+  "fileTypes": [
+    "cs"
+  ],
+  "injectionSelector": [
+    "L:source -comment -string"
+  ],
+  "patterns": [
+    {
+      "comment": "C# multi-lines strings",
+      "begin": "(@\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword"
+        }
+      },
+      "end": "(\")",
+      "patterns": [
+        {
+          "include": "source.sql"
+        }
+      ]
+    }
+  ]
+}

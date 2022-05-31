@@ -93,21 +93,6 @@
           "include": "source.sql"
         }
       ]
-    },
-    {
-      "comment": "C# multi-lines strings",
-      "begin": "(@\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
-      "beginCaptures": {
-        "2": {
-          "name": "keyword"
-        }
-      },
-      "end": "(\")",
-      "patterns": [
-        {
-          "include": "source.sql"
-        }
-      ]
     }
   ]
 }
