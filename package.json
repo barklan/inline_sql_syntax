@@ -1,155 +1,161 @@
 {
-  "name": "inline-sql-syntax",
-  "displayName": "Inline SQL",
-  "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
-  "version": "2.11.0",
-  "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
-  "publisher": "qufiwefefwoyn",
-  "license": "MIT",
-  "icon": "assets/logo.png",
-  "repository": {
-    "url": "https://github.com/barklan/inline_sql_syntax"
-  },
-  "homepage": "https://github.com/barklan/inline_sql_syntax",
-  "engines": {
-    "vscode": "^1.63.0"
-  },
-  "categories": [
-    "Linters",
-    "Other"
-  ],
-  "keywords": [
-    "sql",
-    "postgres",
-    "mysql",
-    "lint",
-    "inline"
-  ],
-  "activationEvents": [
-    "onLanguage:python",
-    "onLanguage:go",
-    "onLanguage:javascript",
-    "onLanguage:typescript",
-    "onLanguage:java",
-    "onLanguage:ruby",
-    "onLanguage:csharp",
-    "onLanguage:rust",
-    "onLanguage:sql",
-    "onLanguage:php"
-  ],
-  "main": "./out/extension.js",
-  "browser": "./out/extension.js",
-  "scripts": {
-    "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --external:pg-native --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "test-compile": "tsc -p ./",
-    "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
-    "watch": "tsc -watch -p ./"
-  },
-  "contributes": {
-    "grammars": [
-      {
-        "path": "./syntaxes/highlight-sql-string.json",
-        "scopeName": "inline-sql.injection",
-        "injectTo": [
-          "source.python",
-          "source.go",
-          "source.java",
-          "source.ruby",
-          "source.cs",
-          "source.js",
-          "source.ts",
-          "source.vue",
-          "source.svelte",
-          "source.tsx",
-          "source.rust",
-          "text.html.php"
-        ],
-        "embeddedLanguages": {
-          "meta.embedded.sql": "sql"
-        }
-      },
-      {
-        "path": "./syntaxes/php-multiline.json",
-        "scopeName": "php-multiline.injection",
-        "injectTo": [
-          "text.html.php"
-        ],
-        "embeddedLanguages": {
-          "meta.embedded.sql": "sql"
-        }
-      },
-      {
-        "path": "./syntaxes/c-sharp-multiline.json",
-        "scopeName": "c-sharp-multiline.injection",
-        "injectTo": [
-          "source.cs"
-        ],
-        "embeddedLanguages": {
-          "meta.embedded.sql": "sql"
-        }
-      }
+    "name": "inline-sql-syntax",
+    "displayName": "Inline SQL",
+    "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
+    "version": "2.11.0",
+    "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
+    "publisher": "qufiwefefwoyn",
+    "license": "MIT",
+    "icon": "assets/logo.png",
+    "repository": {
+        "url": "https://github.com/barklan/inline_sql_syntax"
+    },
+    "homepage": "https://github.com/barklan/inline_sql_syntax",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "categories": [
+        "Linters",
+        "Other"
     ],
-    "configuration": {
-      "title": "inline-sql-syntax",
-      "properties": {
-        "inlineSQL.enableDBIntegration": {
-          "type": "boolean",
-          "default": false,
-          "markdownDescription": "Enable linting using real database."
-        },
-        "inlineSQL.dbDriver": {
-          "type": "string",
-          "default": "postgres",
-          "description": "Driver to use for verifying queries. It currently supports MySQL and Postgres.",
-          "enum": [
-            "mysql",
-            "postgres"
-          ]
-        },
-        "inlineSQL.dbHost": {
-          "type": "string",
-          "default": "localhost",
-          "markdownDescription": "Database host address."
-        },
-        "inlineSQL.dbPort": {
-          "type": "number",
-          "default": 5432,
-          "markdownDescription": "Database port."
-        },
-        "inlineSQL.dbUser": {
-          "type": "string",
-          "default": "postgres",
-          "markdownDescription": "Database user."
-        },
-        "inlineSQL.dbPassword": {
-          "type": "string",
-          "default": "postgres",
-          "markdownDescription": "Database password."
-        },
-        "inlineSQL.lintSQLFiles": {
-          "type": "boolean",
-          "default": false,
-          "markdownDescription": "Enable linting for SQL files."
+    "keywords": [
+        "sql",
+        "postgres",
+        "mysql",
+        "lint",
+        "inline"
+    ],
+    "activationEvents": [
+        "onLanguage:python",
+        "onLanguage:go",
+        "onLanguage:javascript",
+        "onLanguage:typescript",
+        "onLanguage:java",
+        "onLanguage:ruby",
+        "onLanguage:csharp",
+        "onLanguage:rust",
+        "onLanguage:sql",
+        "onLanguage:php"
+    ],
+    "main": "./out/extension.js",
+    "browser": "./out/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --external:pg-native --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "test-compile": "tsc -p ./",
+        "compile": "tsc -p ./",
+        "lint": "eslint . --ext .ts,.tsx",
+        "watch": "tsc -watch -p ./"
+    },
+    "contributes": {
+        "grammars": [
+            {
+                "path": "./syntaxes/highlight-sql-string.json",
+                "scopeName": "inline-sql.injection",
+                "injectTo": [
+                    "source.python",
+                    "source.go",
+                    "source.java",
+                    "source.ruby",
+                    "source.cs",
+                    "source.js",
+                    "source.ts",
+                    "source.vue",
+                    "source.svelte",
+                    "source.tsx",
+                    "source.rust",
+                    "text.html.php"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            },
+            {
+                "path": "./syntaxes/php-multiline.json",
+                "scopeName": "php-multiline.injection",
+                "injectTo": [
+                    "text.html.php"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            },
+            {
+                "path": "./syntaxes/c-sharp-multiline.json",
+                "scopeName": "c-sharp-multiline.injection",
+                "injectTo": [
+                    "source.cs"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            }
+        ],
+        "configuration": {
+            "title": "inline-sql-syntax",
+            "properties": {
+                "inlineSQL.enableDBIntegration": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable linting using real database."
+                },
+                "inlineSQL.dbDriver": {
+                    "type": "string",
+                    "default": "postgres",
+                    "description": "Driver to use for verifying queries. It currently supports MySQL and Postgres.",
+                    "enum": [
+                        "mysql",
+                        "postgres"
+                    ]
+                },
+                "inlineSQL.dbHost": {
+                    "type": "string",
+                    "default": "localhost",
+                    "markdownDescription": "Database host address."
+                },
+                "inlineSQL.dbPort": {
+                    "type": "number",
+                    "default": 5432,
+                    "markdownDescription": "Database port."
+                },
+                "inlineSQL.dbUser": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database user."
+                },
+                "inlineSQL.dbPassword": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database password."
+                },
+                "inlineSQL.lintSQLFiles": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable linting for SQL files."
+                }
+            }
         }
-      }
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "@types/vscode": "^1.63.0",
+        "@typescript-eslint/eslint-plugin": "^5.18.0",
+        "@typescript-eslint/parser": "^5.18.0",
+        "esbuild": "^0.14.25",
+        "eslint": "^8.12.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "typescript": "^4.6.2"
+    },
+    "dependencies": {
+        "sql-lint": "^0.0.19"
+    },
+    "__metadata": {
+        "id": "4d32ffbd-a404-4f22-9022-38a9e83e55f1",
+        "publisherDisplayName": "qufiwefefwoyn",
+        "publisherId": "5be51ce2-befe-4527-952a-3e1c764d2c4e",
+        "isPreReleaseVersion": false
     }
-  },
-  "devDependencies": {
-    "@types/node": "^17.0.21",
-    "@types/vscode": "^1.63.0",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "esbuild": "^0.14.25",
-    "eslint": "^8.12.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "typescript": "^4.6.2"
-  },
-  "dependencies": {
-    "sql-lint": "^0.0.19"
-  }
 }
