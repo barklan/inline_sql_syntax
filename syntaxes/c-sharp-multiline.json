@@ -9,10 +9,25 @@
     "patterns": [
         {
             "comment": "C# multi-lines strings",
-            "begin": "(@\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "begin": "(@\")(--sql)",
             "beginCaptures": {
                 "2": {
-                    "name": "keyword"
+                    "name": "comment.sql"
+                }
+            },
+            "end": "(\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "comment": "C# multi-lines strings",
+            "begin": "(@\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
                 }
             },
             "end": "(\")",

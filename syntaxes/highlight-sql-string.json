@@ -53,24 +53,10 @@
             ]
         },
         {
-            "begin": "(`)((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "begin": "(\")(--sql)",
             "beginCaptures": {
                 "2": {
-                    "name": "keyword"
-                }
-            },
-            "end": "(`)",
-            "patterns": [
-                {
-                    "include": "source.sql"
-                }
-            ]
-        },
-        {
-            "begin": "(\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
-            "beginCaptures": {
-                "2": {
-                    "name": "keyword"
+                    "name": "comment.sql"
                 }
             },
             "end": "(\")",
@@ -81,10 +67,66 @@
             ]
         },
         {
-            "begin": "(\"\"\")((--sql)|SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "begin": "(\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
             "beginCaptures": {
                 "2": {
-                    "name": "keyword"
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(`)(--sql)",
+            "beginCaptures": {
+                "2": {
+                    "name": "comment.sql"
+                }
+            },
+            "end": "(`)",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(`)(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(`)",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(\"\"\")(--sql)",
+            "beginCaptures": {
+                "2": {
+                    "name": "comment.sql"
+                }
+            },
+            "end": "(\"\"\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
                 }
             },
             "end": "(\"\"\")",
