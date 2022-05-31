@@ -17,7 +17,25 @@
         "eslint-plugin-import"
     ],
     "rules": {
-        "indent": ["error", 4],
+        "operator-linebreak": [
+            "off"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "quotes": [
+            "off"
+        ],
+        "implicit-arrow-linebreak": [
+            "off"
+        ],
+        "function-paren-newline": [
+            "off"
+        ],
+        "no-await-in-loop": [
+            "off"
+        ],
         "import/extensions": [
             "error",
             "ignorePackages",
