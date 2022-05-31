@@ -130,7 +130,6 @@ export async function refreshDiagnostics(
             if (lineOfText.text.includes(sqlStringBound)) {
                 sqlStringCnt += 1;
                 const subDiagnostics = await checkRange(
-                    // eslint-disable-line no-await-in-loop
                     log,
                     doc,
                     sqlStartLine,

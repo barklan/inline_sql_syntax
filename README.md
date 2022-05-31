@@ -48,12 +48,12 @@ Integration with real database is available and controlled through VSCode option
 
 ```json
 {
-  "inlineSQL.enableDBIntegration": true,
-  "inlineSQL.dbDriver": "postgres",
-  "inlineSQL.dbHost": "localhost",
-  "inlineSQL.dbPort": 5432,
-  "inlineSQL.dbUser": "postgres",
-  "inlineSQL.dbPassword": "postgres"
+    "inlineSQL.enableDBIntegration": true,
+    "inlineSQL.dbDriver": "postgres",
+    "inlineSQL.dbHost": "localhost",
+    "inlineSQL.dbPort": 5432,
+    "inlineSQL.dbUser": "postgres",
+    "inlineSQL.dbPassword": "postgres"
 }
 ```
 
@@ -108,7 +108,7 @@ overrides extension's syntax.
 
 ```json
 {
-  "gopls.ui.semanticTokens": false
+    "gopls.ui.semanticTokens": false
 }
 ```
 
@@ -116,7 +116,7 @@ overrides extension's syntax.
 
 ```json
 {
-  "rust-analyzer.highlighting.strings": false
+    "rust-analyzer.highlighting.strings": false
 }
 ```
 
@@ -124,7 +124,7 @@ overrides extension's syntax.
 
 ```json
 {
-  "csharp.semanticHighlighting.enabled": false
+    "csharp.semanticHighlighting.enabled": false
 }
 ```
 
