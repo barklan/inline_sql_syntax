@@ -1,53 +1,58 @@
 default_stages: [commit]
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
-    hooks:
-      - id: end-of-file-fixer
-      - id: check-added-large-files
-      - id: trailing-whitespace
-      - id: check-merge-conflict
-      - id: check-toml
-      - id: check-yaml
-      - id: detect-private-key
-      - id: check-json
-        exclude: ".vscode/tasks.json"
-      - id: check-case-conflict
-      - id: check-symlinks
-      - id: no-commit-to-branch
-      - id: mixed-line-ending
-        args: ["--fix=no"]
-  - repo: https://github.com/jorisroovers/gitlint
-    rev: v0.17.0
-    hooks:
-      - id: gitlint
-        args: ["--ignore=body-is-missing", "--contrib=contrib-title-conventional-commits", "--msg-filename"]
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.1.0
-    hooks:
-      - id: codespell
-        exclude: "^go.sum"
-  - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.2.0
-    hooks:
-      - id: detect-secrets
-        exclude: ".*_test.go$|README.md"
-  - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.8.6
-    hooks:
-      - id: gitleaks
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.31.1
-    hooks:
-      - id: markdownlint
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.2.0
+      hooks:
+          - id: end-of-file-fixer
+          - id: check-added-large-files
+          - id: trailing-whitespace
+          - id: check-merge-conflict
+          - id: check-toml
+          - id: check-yaml
+          - id: detect-private-key
+          - id: check-json
+            exclude: '.vscode/tasks.json'
+          - id: check-case-conflict
+          - id: check-symlinks
+          - id: no-commit-to-branch
+          - id: mixed-line-ending
+            args: ['--fix=no']
+    - repo: https://github.com/jorisroovers/gitlint
+      rev: v0.17.0
+      hooks:
+          - id: gitlint
+            args:
+                [
+                    '--ignore=body-is-missing,body-min-length',
+                    '--contrib=contrib-title-conventional-commits',
+                    '--msg-filename',
+                ]
+    - repo: https://github.com/codespell-project/codespell
+      rev: v2.1.0
+      hooks:
+          - id: codespell
+            exclude: '^go.sum'
+    - repo: https://github.com/Yelp/detect-secrets
+      rev: v1.2.0
+      hooks:
+          - id: detect-secrets
+            exclude: '.*_test.go$|README.md'
+    - repo: https://github.com/zricethezav/gitleaks
+      rev: v8.8.6
+      hooks:
+          - id: gitleaks
+    - repo: https://github.com/igorshubovych/markdownlint-cli
+      rev: v0.31.1
+      hooks:
+          - id: markdownlint
 ci:
-  autofix_commit_msg: |
-    [pre-commit.ci] auto fixes from pre-commit.com hooks
-    for more information, see https://pre-commit.ci
-  autofix_prs: false
-  autoupdate_branch: ""
-  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
-  autoupdate_schedule: monthly
-  # These require either docker or docker-compose. Use separate job for golangci-lint.
-  skip: []
-  submodules: false
+    autofix_commit_msg: |
+        [pre-commit.ci] auto fixes from pre-commit.com hooks
+        for more information, see https://pre-commit.ci
+    autofix_prs: false
+    autoupdate_branch: ''
+    autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+    autoupdate_schedule: monthly
+    # These require either docker or docker-compose. Use separate job for golangci-lint.
+    skip: []
+    submodules: false

@@ -26,5 +26,11 @@ Also, I hate manual testing.;
 select * from book where id = 34;
 `
 
-	print(query, another, more, notQuery, more2)
+	more3 := `--sql; select * from book;`
+
+	print(query, another, more, notQuery, more2, more3)
+}
+
+func add(a, b int) int {
+	return a + b
 }

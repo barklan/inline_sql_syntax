@@ -24,7 +24,7 @@
         },
         {
             "comment": "C# multi-lines strings",
-            "begin": "(@\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE)",
+            "begin": "(@\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
