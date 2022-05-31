@@ -73,8 +73,6 @@ Integration with real database is available and controlled through VSCode option
 
 ![go](docs/go_lint2.png)
 
-## More syntax highlighting examples
-
 <table style="width:100%; border: none!important;">
   <tr>
     <td>Python</td>
@@ -96,8 +94,6 @@ Integration with real database is available and controlled through VSCode option
     <td><img src="docs/java.png" /></td>
   </tr>
 </table>
-
-<h3 style="text-align:center;">Go</h3>
 
 ## Limitations
 
