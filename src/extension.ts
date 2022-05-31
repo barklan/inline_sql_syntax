@@ -6,6 +6,7 @@ export const SQL_FLAG_REGEX = /--\s*sql/;
 export const BACKTICK_SQL_REGEX = /`--\s*sql/;
 export const QUOTE_SQL_REGEX = /"--\s*sql/;
 export const PY_SQL_REGEX = /"""--\s*sql/;
+export const PHP_SQL = '<<<SQL';
 
 async function checkRange(
     log: vscode.OutputChannel,
@@ -15,6 +16,7 @@ async function checkRange(
     lineOfTextEnd: vscode.TextLine,
     lineIndexEnd: number,
     endStr: string,
+    startRangePosition: number,
 ): Promise<vscode.Diagnostic[]> {
     const diagnostics: vscode.Diagnostic[] = [];
 
@@ -28,11 +30,13 @@ async function checkRange(
     if (endStr === 'eof') {
         sqlStr = doc.getText();
     } else {
-        const indexStart = lineOfTextStart.text.search(SQL_FLAG_REGEX);
+        if (startRangePosition === -1) {
+            startRangePosition = lineOfTextStart.text.search(SQL_FLAG_REGEX);
+        }
         const indexEnd = lineOfTextEnd.text.indexOf(endStr);
         range = new vscode.Range(
             lineIndexStart,
-            indexStart,
+            startRangePosition,
             lineIndexEnd,
             indexEnd,
         );
@@ -83,6 +87,7 @@ export async function refreshDiagnostics(
     const diagnostics: vscode.Diagnostic[] = [];
 
     let sqlStartLine = doc.lineAt(0);
+    let startRangePosition = -1;
     let sqlStringBound = '';
     let sqlStartIndex = -1;
 
@@ -101,6 +106,7 @@ export async function refreshDiagnostics(
             lastLine,
             doc.lineCount - 1,
             sqlStringBound,
+            startRangePosition,
         );
         diagnostics.push(...subDiagnostics);
 
@@ -125,6 +131,13 @@ export async function refreshDiagnostics(
                 sqlStringBound = '"""';
                 sqlStartIndex = lineIndex;
             }
+            const phpPatternStart = lineOfText.text.indexOf(PHP_SQL);
+            if (phpPatternStart !== -1) {
+                sqlStartLine = lineOfText;
+                startRangePosition = phpPatternStart + PHP_SQL.length;
+                sqlStringBound = 'SQL;';
+                sqlStartIndex = lineIndex;
+            }
         } else if (sqlStringBound !== '') {
             const lineOfText = doc.lineAt(lineIndex);
             if (lineOfText.text.includes(sqlStringBound)) {
@@ -137,6 +150,7 @@ export async function refreshDiagnostics(
                     lineOfText,
                     lineIndex,
                     sqlStringBound,
+                    startRangePosition,
                 );
                 diagnostics.push(...subDiagnostics);
                 sqlStartIndex = -1;
