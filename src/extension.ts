@@ -68,12 +68,13 @@ export async function refreshDiagnostics(
         const lastLineIndex = doc.lineCount - 1;
         const lastLine = doc.lineAt(lastLineIndex);
 
-        const range = new vscode.Range(0, 0, lastLineIndex, lastLine.text.length);
-        const subDiagnostics = await checkRange(
-            log,
-            doc,
-            range,
+        const range = new vscode.Range(
+            0,
+            0,
+            lastLineIndex,
+            lastLine.text.length,
         );
+        const subDiagnostics = await checkRange(log, doc, range);
         diagnostics.push(...subDiagnostics);
 
         inlinesqlDiagnostics.set(doc.uri, diagnostics);
@@ -98,12 +99,13 @@ export async function refreshDiagnostics(
             let endSqlIndex = lineOfText.indexOf(sqlStringBound);
             if (endSqlIndex !== -1) {
                 sqlStringCnt += 1;
-                const range = new vscode.Range(sqlStartLineIndex, startRangePosition, lineIndex, endSqlIndex);
-                const subDiagnostics = await checkRange(
-                    log,
-                    doc,
-                    range,
+                const range = new vscode.Range(
+                    sqlStartLineIndex,
+                    startRangePosition,
+                    lineIndex,
+                    endSqlIndex,
                 );
+                const subDiagnostics = await checkRange(log, doc, range);
                 diagnostics.push(...subDiagnostics);
                 sqlStartLineIndex = -1;
                 sqlStringBound = '';
