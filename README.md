@@ -15,6 +15,9 @@ the `SELECT`, `INSERT`, `INTO`, `DELETE`, `UPDATE`, `CREATE TABLE`.
 multiline strings that start with either <code>\`--sql</code> (backtick followed by `--sql`),
 `"--sql` or `"""--sql`.**
 
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
 ## Safety
 
 The proper way to sanitize data for insertion into your database is to
