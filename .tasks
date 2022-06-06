@@ -1,6 +1,7 @@
 [npm-watch]
 command=npm run watch
 output=terminal
+pos=long
 cwd=<root>
 
 [pg-start]
@@ -15,6 +16,7 @@ save=2
 
 [publish]
 command=vsce publish
+output=terminal
 cwd=<root>
 save=2
 
