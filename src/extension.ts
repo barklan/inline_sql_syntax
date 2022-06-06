@@ -2,46 +2,17 @@ import * as vscode from 'vscode';
 import sqlLint from 'sql-lint';
 import * as configuration from './configuration';
 
-export const SQL_FLAG_REGEX = /--\s*sql/;
-export const BACKTICK_SQL_REGEX = /`--\s*sql/;
-export const QUOTE_SQL_REGEX = /"--\s*sql/;
-export const PY_SQL_REGEX = /"""--\s*sql/;
 export const PHP_SQL = '<<<SQL';
+export const SQL_START_REGEX = /(?<token>"""|"|'''|'|`)--\s*sql/;
 
 async function checkRange(
     log: vscode.OutputChannel,
     doc: vscode.TextDocument,
-    lineOfTextStart: vscode.TextLine,
-    lineIndexStart: number,
-    lineOfTextEnd: vscode.TextLine,
-    lineIndexEnd: number,
-    endStr: string,
-    startRangePosition: number,
+    range: vscode.Range,
 ): Promise<vscode.Diagnostic[]> {
     const diagnostics: vscode.Diagnostic[] = [];
 
-    let endChar = lineIndexEnd.toExponential.length - 1;
-    if (endChar === -1) {
-        endChar = 0;
-    }
-    let range = new vscode.Range(lineIndexStart, 0, lineIndexEnd, endChar);
-
-    let sqlStr = '';
-    if (endStr === 'eof') {
-        sqlStr = doc.getText();
-    } else {
-        if (startRangePosition === -1) {
-            startRangePosition = lineOfTextStart.text.search(SQL_FLAG_REGEX);
-        }
-        const indexEnd = lineOfTextEnd.text.indexOf(endStr);
-        range = new vscode.Range(
-            lineIndexStart,
-            startRangePosition,
-            lineIndexEnd,
-            indexEnd,
-        );
-        sqlStr = doc.getText(range);
-    }
+    const sqlStr = doc.getText(range);
 
     let errors = null;
     log.appendLine(`linting sql: ${sqlStr}`);
@@ -86,74 +57,55 @@ export async function refreshDiagnostics(
 ): Promise<void> {
     const diagnostics: vscode.Diagnostic[] = [];
 
-    let sqlStartLine = doc.lineAt(0);
     let startRangePosition = -1;
     let sqlStringBound = '';
-    let sqlStartIndex = -1;
+    let sqlStartLineIndex = -1;
 
     if (
         configuration.get<boolean>('lintSQLFiles') &&
         doc.languageId === 'sql'
     ) {
-        sqlStringBound = 'eof';
-        sqlStartIndex = 0;
-        const lastLine = doc.lineAt(doc.lineCount - 1);
+        const lastLineIndex = doc.lineCount - 1;
+        const lastLine = doc.lineAt(lastLineIndex);
+
+        const range = new vscode.Range(0, 0, lastLineIndex, lastLine.text.length);
         const subDiagnostics = await checkRange(
             log,
             doc,
-            sqlStartLine,
-            sqlStartIndex,
-            lastLine,
-            doc.lineCount - 1,
-            sqlStringBound,
-            startRangePosition,
+            range,
         );
         diagnostics.push(...subDiagnostics);
 
         inlinesqlDiagnostics.set(doc.uri, diagnostics);
         return;
     }
-
+    let match;
+    let phpPatternStart = -1;
     let sqlStringCnt = 0;
     for (let lineIndex = 0; lineIndex < doc.lineCount; lineIndex += 1) {
-        if (sqlStartIndex === -1) {
-            const lineOfText = doc.lineAt(lineIndex);
-            if (BACKTICK_SQL_REGEX.test(lineOfText.text)) {
-                sqlStartLine = lineOfText;
-                sqlStringBound = '`';
-                sqlStartIndex = lineIndex;
-            } else if (QUOTE_SQL_REGEX.test(lineOfText.text)) {
-                sqlStartLine = lineOfText;
-                sqlStringBound = '"';
-                sqlStartIndex = lineIndex;
-            } else if (PY_SQL_REGEX.test(lineOfText.text)) {
-                sqlStartLine = lineOfText;
-                sqlStringBound = '"""';
-                sqlStartIndex = lineIndex;
-            }
-            const phpPatternStart = lineOfText.text.indexOf(PHP_SQL);
-            if (phpPatternStart !== -1) {
-                sqlStartLine = lineOfText;
+        let lineOfText = doc.lineAt(lineIndex).text;
+        if (sqlStartLineIndex === -1) {
+            if ((match = SQL_START_REGEX.exec(lineOfText)) !== null) {
+                startRangePosition = match.index + match.groups!.token.length;
+                sqlStringBound = match.groups!.token;
+                sqlStartLineIndex = lineIndex;
+            } else if ((phpPatternStart = lineOfText.indexOf(PHP_SQL)) !== -1) {
                 startRangePosition = phpPatternStart + PHP_SQL.length;
                 sqlStringBound = 'SQL;';
-                sqlStartIndex = lineIndex;
+                sqlStartLineIndex = lineIndex;
             }
         } else if (sqlStringBound !== '') {
-            const lineOfText = doc.lineAt(lineIndex);
-            if (lineOfText.text.includes(sqlStringBound)) {
+            let endSqlIndex = lineOfText.indexOf(sqlStringBound);
+            if (endSqlIndex !== -1) {
                 sqlStringCnt += 1;
+                const range = new vscode.Range(sqlStartLineIndex, startRangePosition, lineIndex, endSqlIndex);
                 const subDiagnostics = await checkRange(
                     log,
                     doc,
-                    sqlStartLine,
-                    sqlStartIndex,
-                    lineOfText,
-                    lineIndex,
-                    sqlStringBound,
-                    startRangePosition,
+                    range,
                 );
                 diagnostics.push(...subDiagnostics);
-                sqlStartIndex = -1;
+                sqlStartLineIndex = -1;
                 sqlStringBound = '';
             }
         }
