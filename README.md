@@ -16,6 +16,44 @@ multiline strings that start with either <code>\`--sql</code> (backtick followed
 `"--sql` or `"""--sql`.**
 
 <!-- readme: contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/barklan">
+            <img src="https://avatars.githubusercontent.com/u/71007493?v=4" width="100;" alt="barklan"/>
+            <br />
+            <sub><b>Gleb Buzin</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/tamasfe">
+            <img src="https://avatars.githubusercontent.com/u/25967296?v=4" width="100;" alt="tamasfe"/>
+            <br />
+            <sub><b>Ferenc Tamás</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/nossrannug">
+            <img src="https://avatars.githubusercontent.com/u/416906?v=4" width="100;" alt="nossrannug"/>
+            <br />
+            <sub><b>Gunnar Sv Sigurbjörnsson</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/JonathanWolfe">
+            <img src="https://avatars.githubusercontent.com/u/1449779?v=4" width="100;" alt="JonathanWolfe"/>
+            <br />
+            <sub><b>Jon Wolfe</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/titouancreach">
+            <img src="https://avatars.githubusercontent.com/u/3995719?v=4" width="100;" alt="titouancreach"/>
+            <br />
+            <sub><b>Titouan CREACH</b></sub>
+        </a>
+    </td></tr>
+</table>
 <!-- readme: contributors -end -->
 
 ## Safety
