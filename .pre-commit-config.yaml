@@ -14,7 +14,6 @@ repos:
             exclude: '.vscode/tasks.json'
           - id: check-case-conflict
           - id: check-symlinks
-          - id: no-commit-to-branch
           - id: mixed-line-ending
             args: ['--fix=no']
     - repo: https://github.com/jorisroovers/gitlint
