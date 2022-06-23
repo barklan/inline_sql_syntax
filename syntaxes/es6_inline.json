@@ -1,0 +1,51 @@
+{
+    "scopeName": "es6_inline",
+    "fileTypes": [
+        "js",
+        "jsx",
+        "ts",
+        "tsx"
+    ],
+    "injectionSelector": "L:source.js -comment -string, L:source.jsx -comment -string, L:source.js.jsx -comment -string, L:source.ts -comment -string, L:source.js (string.quoted.double.html, string.quoted.single.html), L:source.jsx (string.quoted.double.html, string.quoted.single.html), L:source.js.jsx (string.quoted.double.html, string.quoted.single.html), L:source.ts (string.quoted.double.html, string.quoted.single.html), L:source.tsx (string.quoted.double.html, string.quoted.single.html)",
+    "injections": {
+        "L:source": {
+            "patterns": [
+                {
+                    "match": "<",
+                    "name": "invalid.illegal.bad-angle-bracket.html"
+                }
+            ]
+        }
+    },
+    "patterns": [
+        {
+            "contentName": "meta.embedded.sql",
+            "begin": "(?x)(\\s*?(\\w+\\.)?(?:sql|/\\*\\s*sql\\s*\\*/)\\s*)(`)",
+            "beginCaptures": {
+                "0": {
+                    "name": "string.template.ts, punctuation.definition.string.template.begin.ts"
+                },
+                "1": {
+                    "name": "entity.name.function.tagged-template.ts"
+                }
+            },
+            "end": "(`)",
+            "endCaptures": {
+                "0": {
+                    "name": "string.template.ts, punctuation.definition.string.template.end.ts"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.ts#template-substitution-element"
+                },
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "include": "source.ts#template-substitution-element"
+        }
+    ]
+}

@@ -2,7 +2,7 @@
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP.",
-    "version": "2.14.0",
+    "version": "2.15.0",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
@@ -90,6 +90,21 @@
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"
+                }
+            },
+            {
+                "path": "./syntaxes/es6_inline.json",
+                "scopeName": "es6_inline",
+                "injectTo": [
+                    "source.js",
+                    "source.js.jsx",
+                    "source.jsx",
+                    "source.ts",
+                    "source.tsx"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql",
+                    "meta.template.expression.ts": "typescript"
                 }
             }
         ],

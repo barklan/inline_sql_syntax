@@ -10,6 +10,14 @@ Supported languages are **Python**, **Go**, **JavaScript**, **TypeScript**, **Ru
 Syntax highlighting works for strings starting with `--sql` or any of
 the `SELECT`, `INSERT`, `INTO`, `DELETE`, `UPDATE`, `CREATE TABLE`.
 
+Also works with ES6 Template Strings:
+
+```javascript
+const query = sql`
+    select * from book;
+`;
+```
+
 **Linting and diagnostics powered entirely by awesome
 [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) and works for
 multiline strings that start with either <code>\`--sql</code> (backtick followed by `--sql`),
