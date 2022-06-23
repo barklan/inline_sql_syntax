@@ -184,3 +184,4 @@ helping to avoid small bugs and typos almost instantly.
 - [joereynolds/sql-lint](https://github.com/joereynolds/sql-lint) - Used for linting.
 - [joe-re/sql-language-server](https://github.com/joe-re/sql-language-server) - SQL Language Server, consider it if you use separate files for sql.
 - [cmoog/vscode-sql-notebook](https://github.com/cmoog/vscode-sql-notebook) - Open SQL files as VSCode Notebooks.
+- [pushqrdx/vscode-inline-html](https://github.com/pushqrdx/vscode-inline-html) - ES6 Template Strings inline HTML.
