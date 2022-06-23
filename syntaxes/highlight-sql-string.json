@@ -109,7 +109,8 @@
             ]
         },
         {
-            "begin": "(\"\"\")(--\\s*sql)",
+            "comment": "Python multi-line strings",
+            "begin": "f?(\"\"\")(--\\s*sql)",
             "beginCaptures": {
                 "2": {
                     "name": "comment.sql"
