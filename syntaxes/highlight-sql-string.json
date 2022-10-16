@@ -2,7 +2,6 @@
     "scopeName": "inline-sql.injection",
     "fileTypes": [
         "py",
-        "go",
         "js",
         "jsx",
         "ts",
