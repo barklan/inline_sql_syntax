@@ -28,7 +28,11 @@ select * from book where id = 34;
 
 	more3 := `--sql; select * from book;`
 
-	print(query, another, more, notQuery, more2, more3)
+	more4 := `select * from book;`
+
+	more5 := `SELECT * from book;`
+
+	print(query, another, more, notQuery, more2, more3, more4, more5)
 }
 
 func add(a, b int) int {
