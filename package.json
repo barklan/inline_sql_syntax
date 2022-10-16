@@ -56,7 +56,6 @@
                 "scopeName": "inline-sql.injection",
                 "injectTo": [
                     "source.python",
-                    "source.go",
                     "source.java",
                     "source.ruby",
                     "source.cs",
@@ -105,6 +104,16 @@
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql",
                     "meta.template.expression.ts": "typescript"
+                }
+            },
+            {
+                "path": "./syntaxes/golang-multiline.json",
+                "scopeName": "golang-multiline.injection",
+                "injectTo": [
+                    "source.go"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
                 }
             }
         ],

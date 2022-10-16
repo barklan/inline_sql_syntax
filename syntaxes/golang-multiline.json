@@ -1,0 +1,23 @@
+{
+    "scopeName": "golang-multiline.injection",
+    "fileTypes": [
+        "go"
+    ],
+    "injectionSelector": [
+        "L:string.quoted.raw.go -comment"
+    ],
+    "patterns": [
+        {
+            "name": "meta.embedded.sql",
+            "begin": "\\s*((?i)(select|with|insert|update|create table|create index)(?=\\s))|(--\\w+)",
+            "end": "(?=`)",
+            "beginCaptures": {
+            "2": { "name": "keyword.other.DML.sql" },
+            "3": { "name": "comment.line.double-dash.sql" }
+            },
+            "patterns": [
+                { "include": "source.sql" }
+            ]
+        }
+    ]
+}

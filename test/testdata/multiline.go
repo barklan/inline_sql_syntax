@@ -12,8 +12,8 @@ select * from book where id = 34;
 `
 
 	notQuery := `
-SELECT This is not a query and should not be considered
-as one as --sql comment is not present.
+SELECT This a query and should be considered
+as one even though --sql comment is not present.
 Also, I hate manual testing.;
 `
 
@@ -32,7 +32,17 @@ select * from book where id = 34;
 
 	more5 := `SELECT * from book;`
 
-	print(query, another, more, notQuery, more2, more3, more4, more5)
+	more6 := `
+		SELECT * from book;
+	`
+
+	more7 := `
+		with hihi as (
+
+		)
+	`
+
+	print(query, another, more, notQuery, more2, more3, more4, more5, more6, more7)
 }
 
 func add(a, b int) int {
