@@ -67,7 +67,7 @@
             ]
         },
         {
-            "begin": "(\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX )",
+            "begin": "(?i)(\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX )",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
@@ -95,7 +95,7 @@
             ]
         },
         {
-            "begin": "(`)(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "begin": "(?i)(`)(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
@@ -124,7 +124,7 @@
             ]
         },
         {
-            "begin": "(\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "begin": "(?i)(\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
