@@ -17,6 +17,12 @@ as one even though --sql comment is not present.
 Also, I hate manual testing.;
 `
 
+	notQuery2 := `
+		this is really not a query, but we do demonstrate the only known issue
+		with this approach, where an in-string sql keyword will make the sql injection
+		mis-fire.
+	`
+
 	more := `--sql
 	select * from book where id = 34;
 `
@@ -42,7 +48,7 @@ select * from book where id = 34;
 		)
 	`
 
-	print(query, another, more, notQuery, more2, more3, more4, more5, more6, more7)
+	print(query, another, more, notQuery, notQuery2, more2, more3, more4, more5, more6, more7)
 }
 
 func add(a, b int) int {
