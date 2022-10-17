@@ -29,6 +29,20 @@ multiline strings that start with either <code>\`--sql</code> (backtick followed
 <table>
 <tr>
     <td align="center">
+        <a href="https://github.com/barklan">
+            <img src="https://avatars.githubusercontent.com/u/71007493?v=4" width="100;" alt="barklan"/>
+            <br />
+            <sub><b>Gleb Buzin</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/Wild-W">
+            <img src="https://avatars.githubusercontent.com/u/39774593?v=4" width="100;" alt="Wild-W"/>
+            <br />
+            <sub><b>Connor Bren</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/tamasfe">
             <img src="https://avatars.githubusercontent.com/u/25967296?v=4" width="100;" alt="tamasfe"/>
             <br />
