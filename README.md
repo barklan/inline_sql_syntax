@@ -29,10 +29,10 @@ multiline strings that start with either <code>\`--sql</code> (backtick followed
 <table>
 <tr>
     <td align="center">
-        <a href="https://github.com/barklan">
-            <img src="https://avatars.githubusercontent.com/u/71007493?v=4" width="100;" alt="barklan"/>
+        <a href="https://github.com/jwhitaker-swiftnav">
+            <img src="https://avatars.githubusercontent.com/u/113399675?v=4" width="100;" alt="jwhitaker-swiftnav"/>
             <br />
-            <sub><b>Gleb Buzin</b></sub>
+            <sub><b>jwhitaker-swiftnav</b></sub>
         </a>
     </td>
     <td align="center">
