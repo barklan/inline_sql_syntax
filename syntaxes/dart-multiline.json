@@ -1,0 +1,71 @@
+{
+    "scopeName": "dart-multiline.injection",
+    "fileTypes": [
+        "dart"
+    ],
+    "injectionSelector": [
+        "L:source -comment -string"
+    ],
+    "patterns": [
+        {
+            "comment": "Dart single-quote multi-lines strings",
+            "begin": "(''')(--\\s*sql)",
+            "beginCaptures": {
+                "2": {
+                    "name": "comment.sql"
+                }
+            },
+            "end": "(''')",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "comment": "Dart single-quote multi-lines strings",
+            "begin": "(''')(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(''')",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "comment": "Dart double-quote multi-lines strings",
+            "begin": "(\"\"\")(--\\s*sql)",
+            "beginCaptures": {
+                "2": {
+                    "name": "comment.sql"
+                }
+            },
+            "end": "(\"\"\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "comment": "Dart double-quote multi-lines strings",
+            "begin": "(\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(\"\"\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        }
+    ]
+}
