@@ -66,6 +66,7 @@
                     "source.svelte",
                     "source.tsx",
                     "source.rust",
+                    "source.dart",
                     "text.html.php"
                 ],
                 "embeddedLanguages": {
@@ -122,6 +123,16 @@
                 "scopeName": "golang-multiline.injection",
                 "injectTo": [
                     "source.go"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.sql": "sql"
+                }
+            },
+            {
+                "path": "./syntaxes/dart-multiline.json",
+                "scopeName": "dart-multiline.injection",
+                "injectTo": [
+                    "source.dart"
                 ],
                 "embeddedLanguages": {
                     "meta.embedded.sql": "sql"
