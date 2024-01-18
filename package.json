@@ -2,7 +2,7 @@
     "name": "inline-sql-syntax",
     "displayName": "Inline SQL",
     "description": "Highlight and lint SQL strings and SQL files. Python, Go, Rust, JS, TS, Ruby, Java, C#, PHP, Lua.",
-    "version": "2.16.0",
+    "version": "2.17.0",
     "author": "qufiwefefwoyn <qufiwefefwoyn@gmail.com>",
     "publisher": "qufiwefefwoyn",
     "license": "MIT",
@@ -38,8 +38,8 @@
         "onLanguage:php",
         "onLanguage:lua"
     ],
-    "main": "./out/extension.js",
-    "browser": "./out/extension.js",
+    "main": "./out/main.js",
+    "browser": "./out/main.js",
     "scripts": {
         "vscode:prepublish": "npm run esbuild-base -- --minify",
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --external:pg-native --format=cjs --platform=node",
@@ -174,7 +174,7 @@
         }
     },
     "devDependencies": {
-        "@types/node": "^17.0.21",
+        "@types/node": "^20.11.5",
         "@types/vscode": "^1.63.0",
         "esbuild": "^0.14.25",
         "prettier": "2.6.2",
