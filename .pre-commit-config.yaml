@@ -1,7 +1,7 @@
 default_stages: [commit]
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.2.0
+      rev: v4.5.0
       hooks:
           - id: end-of-file-fixer
           - id: check-added-large-files
@@ -17,7 +17,7 @@ repos:
           - id: mixed-line-ending
             args: ['--fix=no']
     - repo: https://github.com/jorisroovers/gitlint
-      rev: v0.17.0
+      rev: v0.19.1
       hooks:
           - id: gitlint
             args:
@@ -27,21 +27,21 @@ repos:
                     '--msg-filename',
                 ]
     - repo: https://github.com/codespell-project/codespell
-      rev: v2.1.0
+      rev: v2.2.6
       hooks:
           - id: codespell
             exclude: '^go.sum'
     - repo: https://github.com/Yelp/detect-secrets
-      rev: v1.2.0
+      rev: v1.4.0
       hooks:
           - id: detect-secrets
             exclude: '.*_test.go$|README.md'
     - repo: https://github.com/zricethezav/gitleaks
-      rev: v8.8.6
+      rev: v8.18.2
       hooks:
           - id: gitleaks
     - repo: https://github.com/igorshubovych/markdownlint-cli
-      rev: v0.31.1
+      rev: v0.39.0
       hooks:
           - id: markdownlint
 ci:
