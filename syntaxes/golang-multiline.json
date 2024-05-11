@@ -9,7 +9,7 @@
     "patterns": [
         {
             "name": "meta.embedded.sql",
-            "begin": "\\s*((?i)(select|with|insert|update|create table|create index)(?=\\s))|(--\\w+)",
+            "begin": "\\s*((?i)(select|with|insert|update|create table|create index)(?=\\s))|(--\\s*sql)",
             "end": "(?=`)",
             "beginCaptures": {
             "2": { "name": "keyword.other.DML.sql" },
