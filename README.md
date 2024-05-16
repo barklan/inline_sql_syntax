@@ -111,7 +111,8 @@ Integration with real database is available and controlled through VSCode option
     "inlineSQL.dbHost": "localhost",
     "inlineSQL.dbPort": 5432,
     "inlineSQL.dbUser": "postgres",
-    "inlineSQL.dbPassword": "postgres"
+    "inlineSQL.dbPassword": "postgres",
+    "inlineSQL.lint": true
 }
 ```
 

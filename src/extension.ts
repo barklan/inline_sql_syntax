@@ -12,6 +12,10 @@ async function checkRange(
 ): Promise<vscode.Diagnostic[]> {
     const diagnostics: vscode.Diagnostic[] = [];
 
+    if (!configuration.get('lint')) {
+        return diagnostics;
+    }
+
     const sqlStr = doc.getText(range);
 
     let errors = null;
