@@ -4,4 +4,5 @@ select * from book;
 "#;
 
     let _another = r#"--sql; select * from book;"#;
+    let _another = r##"--sql; select * from "book";"##;
 }

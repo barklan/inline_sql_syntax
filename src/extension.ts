@@ -3,7 +3,8 @@ import sqlLint from 'sql-lint';
 import * as configuration from './configuration';
 
 export const PHP_SQL = '<<<SQL';
-export const SQL_START_REGEX = /(?<token>"""|"|'''|'|`)--\s*sql/;
+export const SQL_START_REGEX =
+    /(?<token>r(?<hashes>#*)?"|"""|"|'''|'|`)--\s*sql/;
 
 async function checkRange(
     log: vscode.OutputChannel,
@@ -60,6 +61,7 @@ export async function refreshDiagnostics(
     let startRangePosition = -1;
     let sqlStringBound = '';
     let sqlStartLineIndex = -1;
+    let hashes = ''; // For Rust raw strings
 
     if (
         configuration.get<boolean>('lintSQLFiles') &&
@@ -88,15 +90,29 @@ export async function refreshDiagnostics(
         if (sqlStartLineIndex === -1) {
             if ((match = SQL_START_REGEX.exec(lineOfText)) !== null) {
                 startRangePosition = match.index + match.groups!.token.length;
-                sqlStringBound = match.groups!.token;
                 sqlStartLineIndex = lineIndex;
+                if (match.groups!.hashes !== undefined) {
+                    hashes = match.groups!.hashes;
+                    sqlStringBound = `"${hashes}`;
+                } else {
+                    sqlStringBound = match.groups!.token;
+                }
             } else if ((phpPatternStart = lineOfText.indexOf(PHP_SQL)) !== -1) {
                 startRangePosition = phpPatternStart + PHP_SQL.length;
                 sqlStringBound = 'SQL;';
                 sqlStartLineIndex = lineIndex;
             }
-        } else if (sqlStringBound !== '') {
-            let endSqlIndex = lineOfText.indexOf(sqlStringBound);
+        }
+        if (sqlStringBound !== '') {
+            let endSqlIndex = -1;
+            if (lineIndex === sqlStartLineIndex) {
+                endSqlIndex = lineOfText.indexOf(
+                    sqlStringBound,
+                    startRangePosition,
+                );
+            } else {
+                endSqlIndex = lineOfText.indexOf(sqlStringBound);
+            }
             if (endSqlIndex !== -1) {
                 sqlStringCnt += 1;
                 const range = new vscode.Range(
@@ -109,6 +125,7 @@ export async function refreshDiagnostics(
                 diagnostics.push(...subDiagnostics);
                 sqlStartLineIndex = -1;
                 sqlStringBound = '';
+                hashes = '';
             }
         }
     }
