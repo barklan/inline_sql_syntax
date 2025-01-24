@@ -66,7 +66,7 @@
             ]
         },
         {
-            "begin": "(?i)(\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX )",
+            "begin": "(?i)(\"|f\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX )",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
@@ -123,13 +123,41 @@
             ]
         },
         {
-            "begin": "(?i)(\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "begin": "(?i)(\"\"\"|f\"\"\")(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
             "beginCaptures": {
                 "2": {
                     "name": "keyword.sql"
                 }
             },
             "end": "(\"\"\")",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(?i)('''|f''')(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(''')",
+            "patterns": [
+                {
+                    "include": "source.sql"
+                }
+            ]
+        },
+        {
+            "begin": "(?i)('|f')(SELECT |INSERT INTO |DELETE |UPDATE |CREATE TABLE |CREATE INDEX)",
+            "beginCaptures": {
+                "2": {
+                    "name": "keyword.sql"
+                }
+            },
+            "end": "(')",
             "patterns": [
                 {
                     "include": "source.sql"
