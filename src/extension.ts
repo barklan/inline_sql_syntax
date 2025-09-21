@@ -23,6 +23,7 @@ async function checkRange(
                 sql: sqlStr,
                 driver: configuration.get<string>('dbDriver'),
                 host: configuration.get<string>('dbHost'),
+                database: configuration.get<string>('dbDatabase'),
                 port: configuration.get<number>('dbPort'),
                 user: configuration.get<string>('dbUser'),
                 password: configuration.get<string>('dbPassword'),

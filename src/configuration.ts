@@ -12,6 +12,7 @@ export type Configuration = {
     dbDriver: DRIVER;
     dbHost: string;
     dbPort: number;
+    dbDatabase: string;
     dbUser: string;
     dbPassword: string;
     lintSQLFiles: boolean;
