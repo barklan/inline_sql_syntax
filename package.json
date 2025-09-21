@@ -150,6 +150,11 @@
                     "default": "localhost",
                     "markdownDescription": "Database host address."
                 },
+                "inlineSQL.dbDatabase": {
+                    "type": "string",
+                    "default": "postgres",
+                    "markdownDescription": "Database name."
+                },
                 "inlineSQL.dbPort": {
                     "type": "number",
                     "default": 5432,
