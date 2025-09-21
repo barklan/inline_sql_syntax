@@ -181,7 +181,7 @@
         "typescript": "^4.6.2"
     },
     "dependencies": {
-        "sql-lint": "^0.0.19"
+        "sql-lint": "^1.0.0"
     },
     "__metadata": {
         "id": "4d32ffbd-a404-4f22-9022-38a9e83e55f1",
